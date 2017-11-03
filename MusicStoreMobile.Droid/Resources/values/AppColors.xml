@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  
+  <!-- others-->
+  <color name="button_color">@color/Alto</color>
+
+  <color name="login_input_once">@color/PictonBlue</color>
+  <color name="login_input_valid">@color/Shamrock</color>
+  <color name="login_input_error">@color/SunsetOrange</color>
+
+  <color name="gray_text">@color/Gray</color>
+</resources>

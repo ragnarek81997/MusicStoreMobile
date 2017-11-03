@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:fillViewport="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+      <LinearLayout
+          android:id="@+id/main_container"
+          android:focusable="true"
+          android:focusableInTouchMode="true"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:paddingTop="@dimen/element_margin_huge"
+          android:paddingBottom="@dimen/element_margin_huge"
+          android:paddingLeft="@dimen/element_margin_medium"
+          android:paddingRight="@dimen/element_margin_medium"
+          android:orientation="vertical">
+        <android.support.design.widget.TextInputLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/email_input_layout"
+               local:hintTextAppearance="@style/hint_input_appearance"
+               local:errorTextAppearance="@style/error_input_appearance"
+               local:errorEnabled="true"
+               local:MvxBind="Error Errors['Email']">
+          <android.support.v7.widget.AppCompatEditText
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/email_input"
+              android:textColor="@color/black"
+              android:textSize="@dimen/text_large"
+              android:hint="Email"
+              android:inputType="textEmailAddress"
+              android:theme="@style/edit_input_appearance"
+              android:textCursorDrawable="@null"
+              local:MvxBind="Text Email; LineColor InputLineColor(Errors['Email'])" />
+        </android.support.design.widget.TextInputLayout>
+        
+        <android.support.design.widget.TextInputLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/first_name_input_layout"
+               local:hintTextAppearance="@style/hint_input_appearance"
+               local:errorTextAppearance="@style/error_input_appearance"
+               local:errorEnabled="true"
+               local:MvxBind="Error Errors['FirstName']">
+          <android.support.v7.widget.AppCompatEditText
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/first_name_input"
+              android:textColor="@color/black"
+              android:textSize="@dimen/text_large"
+              android:hint="First Name"
+              android:inputType="text"
+              android:theme="@style/edit_input_appearance"
+              android:textCursorDrawable="@null"
+              local:MvxBind="Text FirstName; LineColor InputLineColor(Errors['FirstName'])" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/last_name_input_layout"
+               local:hintTextAppearance="@style/hint_input_appearance"
+               local:errorTextAppearance="@style/error_input_appearance"
+               local:errorEnabled="true"
+               local:MvxBind="Error Errors['LastName']">
+          <android.support.v7.widget.AppCompatEditText
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/last_name_input"
+              android:textColor="@color/black"
+              android:textSize="@dimen/text_large"
+              android:hint="Last Name"
+              android:inputType="text"
+              android:theme="@style/edit_input_appearance"
+              android:textCursorDrawable="@null"
+              local:MvxBind="Text LastName; LineColor InputLineColor(Errors['LastName'])" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/password_input_layout"
+            local:hintTextAppearance="@style/hint_input_appearance"
+            local:errorTextAppearance="@style/error_input_appearance"
+            local:errorEnabled="true"
+            local:MvxBind="Error Errors['Password']">
+          <android.support.v7.widget.AppCompatEditText
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/password_input"
+              android:textSize="@dimen/text_large"
+              android:textColor="@color/black"
+              android:hint="Password"
+              android:inputType="textPassword"
+              android:theme="@style/edit_input_appearance"
+              android:textCursorDrawable="@null"
+              local:MvxBind="Text Password; LineColor InputLineColor(Errors['Password'])" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/birth_date_input_layout"
+            local:hintTextAppearance="@style/hint_input_appearance"
+            local:errorTextAppearance="@style/error_input_appearance"
+            local:errorEnabled="true"
+            local:MvxBind="Error Errors['BirthDate']">
+          <android.support.v7.widget.AppCompatEditText
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/birth_date_input"
+              android:textSize="@dimen/text_large"
+              android:textColor="@color/black"
+              android:hint="Birth Date"
+              android:inputType="date"
+              android:theme="@style/edit_input_appearance"
+              android:textCursorDrawable="@null"
+              local:MvxBind="Text If(BirthDate == null, '', Format('{0:dd.MM.yyyy}', BirthDate)); LineColor InputLineColor(Errors['BirthDate']); Click ChangeBirthDateCommand" />
+        </android.support.design.widget.TextInputLayout>
+        <RelativeLayout
+            android:layout_height="@dimen/button_height"
+            android:layout_width="wrap_content"
+            android:id="@+id/login_button"
+            local:MvxBind="Click RegisterCommand"
+            android:paddingTop="@dimen/element_margin_tiny"
+            android:paddingBottom="@dimen/element_margin_tiny"
+            android:paddingLeft="@dimen/element_margin_large"
+            android:paddingRight="@dimen/element_margin_large"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button_shape">
+          <LinearLayout
+              android:layout_height="match_parent"
+              android:layout_width="wrap_content"
+              android:gravity="center"
+              local:MvxBind="Visibility Visibility(If(RegisterTask == null, false, RegisterTask.IsNotCompleted))">
+            <ProgressBar
+                  android:layout_width="@dimen/button_progress_bar_size"
+                  android:layout_height="@dimen/button_progress_bar_size"
+                  android:paddingRight="@dimen/element_margin_medium"
+                  android:indeterminateTint="@color/white"
+                  android:indeterminateTintMode="multiply" />
+            <TextView
+                android:layout_height="wrap_content"
+                android:text="Loading ..."
+                android:layout_width="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_huge" />
+          </LinearLayout>
+          <LinearLayout
+              android:layout_height="match_parent"
+              android:layout_width="wrap_content"
+              android:gravity="center"
+              local:MvxBind="Visibility InvertedVisibility(If(RegisterTask == null, false, RegisterTask.IsNotCompleted))">
+            <TextView
+                android:layout_height="wrap_content"
+                android:text="Registration"
+                android:layout_width="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_huge" />
+          </LinearLayout>
+        </RelativeLayout>
+      </LinearLayout>
+    </LinearLayout>
+  </ScrollView>
+</LinearLayout>

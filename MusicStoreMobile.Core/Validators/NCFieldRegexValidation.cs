@@ -1,0 +1,37 @@
+﻿using System.Text.RegularExpressions;
+using System.Linq;
+using System.Reflection;
+using MvvmCross.Plugins.Validation;
+
+namespace MusicStoreMobile.Core.Validators
+{
+    public class NCFieldRegexValidation : IValidation
+	{
+		private readonly string _message;
+		private readonly Regex _regex;
+
+		public NCFieldRegexValidation(string regex, string message)
+		{
+			_message = message;
+			_regex = new Regex(regex);
+		}
+
+		public IErrorInfo Validate(string fieldName, object value, object subject)
+		{
+			if (value == null)
+				return null;
+
+			var incValue = value.GetType().GetRuntimeProperties().FirstOrDefault(x => x.Name == "Value").GetValue(value);
+			if (incValue == null)
+				return null;
+
+			var stringValue = incValue.ToString();
+            if (!_regex.IsMatch(stringValue))
+            {
+                var fieldTitle = System.Text.RegularExpressions.Regex.Replace(fieldName, "(?<=.)([A-Z])", " $0", System.Text.RegularExpressions.RegexOptions.None);
+                return new ErrorInfo(fieldName, _message == null ? string.Format("The value of {0} is incorrect", fieldTitle) : string.Format(_message, fieldTitle));
+            }
+			return null;
+		}
+	}
+}

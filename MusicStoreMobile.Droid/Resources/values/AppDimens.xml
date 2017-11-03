@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+  <!-- Standard dimensions -->
+
+  <dimen name="margin_tiny">4dp</dimen>
+  <dimen name="margin_small">8dp</dimen>
+  <dimen name="margin_medium">16dp</dimen>
+  <dimen name="margin_large">32dp</dimen>
+  <dimen name="margin_huge">64dp</dimen>
+
+  <!-- Semantic definitions -->
+  <dimen name="element_margin_smallest">1dp</dimen>
+  <dimen name="element_margin_tinier">3dp</dimen>
+  <dimen name="element_margin_tiny">5dp</dimen>
+  <dimen name="element_margin_small">10dp</dimen>
+  <dimen name="element_margin_medium">15dp</dimen>
+  <dimen name="element_margin_large">20dp</dimen>
+  <dimen name="element_margin_huge">25dp</dimen>
+
+  <dimen name="navigation_drawer_width">290dp</dimen>
+
+  <!-- LoginView -->
+  <dimen name="button_height">35dp</dimen>
+  <dimen name="button_radius">20dp</dimen>
+  <dimen name="button_progress_bar_size">35dp</dimen>
+
+</resources>
