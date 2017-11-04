@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MusicStoreMobile.Core.Models;
 using MusicStoreMobile.Core.ViewModelResults;
+using MusicStoreMobile.Core.Enums;
 
 namespace MusicStoreMobile.Core.Services.Implementations
 {
@@ -26,7 +27,7 @@ namespace MusicStoreMobile.Core.Services.Implementations
         {
             var serviceResult = new ServiceResult<ApplicationUserModel>();
 
-            var dbServieResult = await _dbService.GetObject<ApplicationUserModel>(_authorizedUserToken);
+            var dbServieResult = await _dbService.GetObject<ApplicationUserModel>(_authorizedUserToken, BlobCacheType.Secure);
 
             serviceResult.Success = dbServieResult.Success;
 
@@ -46,7 +47,7 @@ namespace MusicStoreMobile.Core.Services.Implementations
         {
             var serviceResult = new ServiceResult();
 
-            var dbServieResult = await _dbService.RemoveObject(_authorizedUserToken);
+            var dbServieResult = await _dbService.RemoveObject(_authorizedUserToken, BlobCacheType.Secure);
 
             serviceResult.Success = dbServieResult.Success;
 
@@ -62,7 +63,7 @@ namespace MusicStoreMobile.Core.Services.Implementations
         {
             var serviceResult = new ServiceResult();
 
-            var dbServieResult = await _dbService.SaveObject(authorizedUser, _authorizedUserToken);
+            var dbServieResult = await _dbService.SaveObject(authorizedUser, _authorizedUserToken, BlobCacheType.Secure);
 
             serviceResult.Success = dbServieResult.Success;
 

@@ -1,4 +1,5 @@
 ﻿using Akavache;
+using MusicStoreMobile.Core.Enums;
 using MusicStoreMobile.Core.Services.Interfaces;
 using MusicStoreMobile.Core.ViewModelResults;
 using System;
@@ -11,23 +12,43 @@ namespace MusicStoreMobile.Core.Services.Implementations
 {
     class DbService : IDbService
     {
-        public async Task<ServiceResult> CheckDb()
+        #region get blobCache object
+        private IBlobCache GetBlobCache(BlobCacheType blobCache = BlobCacheType.LocalMachine)
+        {
+            IBlobCache blobCacheObject = BlobCache.LocalMachine;
+            switch (blobCache)
+            {
+                case BlobCacheType.InMemory:
+                    blobCacheObject = BlobCache.InMemory;
+                    break;
+                case BlobCacheType.Secure:
+                    blobCacheObject = BlobCache.Secure;
+                    break;
+                case BlobCacheType.UserAccount:
+                    blobCacheObject = BlobCache.UserAccount;
+                    break;
+            }
+            return blobCacheObject;
+        }
+        #endregion get blobCache object
+
+        public async Task<ServiceResult> CheckDb(BlobCacheType blobCache = BlobCacheType.LocalMachine)
         {
             var serviceResult = new ServiceResult();
 
-            var allKeysResult = await GetAllKeys();
+            var allKeysResult = await GetAllKeys(blobCache);
 
             serviceResult.Success = allKeysResult.Success && allKeysResult.Result.Any();
 
             return serviceResult;
         }
 
-        public async Task<ServiceResult<IEnumerable<string>>> GetAllKeys()
+        public async Task<ServiceResult<IEnumerable<string>>> GetAllKeys(BlobCacheType blobCache = BlobCacheType.LocalMachine)
         {
             var serviceResult = new ServiceResult<IEnumerable<string>>();
             try
             {
-                var result = await BlobCache.LocalMachine.GetAllKeys();
+                var result = await GetBlobCache(blobCache).GetAllKeys();
                 serviceResult.Success = true;
                 serviceResult.Result = result;
             }
@@ -40,12 +61,12 @@ namespace MusicStoreMobile.Core.Services.Implementations
             return serviceResult;
         }
 
-        public async Task<ServiceResult<T>> GetObject<T>(string token)
+        public async Task<ServiceResult<T>> GetObject<T>(string token, BlobCacheType blobCache = BlobCacheType.LocalMachine)
         {
             var serviceResult = new ServiceResult<T>();
             try
             {
-                var result = await BlobCache.LocalMachine.GetObject<T>(token);
+                var result = await GetBlobCache(blobCache).GetObject<T>(token);
                 serviceResult.Success = true;
                 serviceResult.Result = result;
             }
@@ -58,12 +79,12 @@ namespace MusicStoreMobile.Core.Services.Implementations
             return serviceResult;
         }
 
-        public async Task<ServiceResult> RemoveObject(string token)
+        public async Task<ServiceResult> RemoveObject(string token, BlobCacheType blobCache = BlobCacheType.LocalMachine)
         {
             var serviceResult = new ServiceResult();
             try
             {
-                var result = await BlobCache.LocalMachine.Invalidate(token);
+                var result = await GetBlobCache(blobCache).Invalidate(token);
                 serviceResult.Success = true;
             }
             catch (Exception ex)
@@ -75,12 +96,12 @@ namespace MusicStoreMobile.Core.Services.Implementations
             return serviceResult;
         }
 
-        public async Task<ServiceResult> SaveObject<T>(T obj, string token)
+        public async Task<ServiceResult> SaveObject<T>(T obj, string token, BlobCacheType blobCache = BlobCacheType.LocalMachine)
         {
             var serviceResult = new ServiceResult();
             try
             {
-                var result = await BlobCache.LocalMachine.InsertObject(token, obj);
+                var result = await GetBlobCache(blobCache).InsertObject(token, obj);
                 serviceResult.Success = true;
             }
             catch (Exception ex)

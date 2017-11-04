@@ -7,9 +7,9 @@ namespace MusicStoreMobile.Core.Rest.Interfaces
 {
     public interface IRestClient
     {
-        Task<ServiceResult<TResult>> MakeApiCall<TResult>(string url, HttpMethod method, object data = null, ByteArrayContent byteData = null, string accessToken = "")
+        Task<ServiceResult<TResult>> MakeApiCall<TResult>(string url, HttpMethod method, object data = null, string accessToken = "")
                         where TResult : class;
 
-        Task<ServiceResult> MakeApiCall(string url, HttpMethod method, object data = null, ByteArrayContent byteData = null, string accessToken = "");
+        Task<ServiceResult> MakeApiCall(string url, HttpMethod method, object data = null, string accessToken = "");
     }
 }

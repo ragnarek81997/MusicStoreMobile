@@ -19,25 +19,18 @@ namespace MusicStoreMobile.Core.Services.Implementations
         private readonly IRestClient _restClient;
         private readonly IAuthorizedUserService _authorizedUserService;
 
-        private string _ipServerPort;
+        private const string _ipServerPort = Constants.IpServerPort;
+        private const string _apiControllerRoutePrefix = "v1/account";
 
         public AuthService(IRestClient restClient, IAuthorizedUserService authorizedUserService)
         {
             _restClient = restClient;
             _authorizedUserService = authorizedUserService;
-
-            _ipServerPort = Constants.IpServerPort;
         }
 
         public async Task<ServiceResult<ApplicationUserModel>> Login(string email, string password)
         {
             var serviceResult = new ServiceResult<ApplicationUserModel>();
-
-            await Task.Delay(5000);
-
-            serviceResult.Success = false;
-            serviceResult.Error.Description = "12345";
-            return serviceResult;
 
             var restUrl = $"{_ipServerPort}v1/token";
 
@@ -87,7 +80,7 @@ namespace MusicStoreMobile.Core.Services.Implementations
             {
                 var authorizedUser = getAuthorizedUserServiceResult.Result;
 
-                var restUrl = $"{_ipServerPort}v1/account/Logout";
+                var restUrl = $"{_ipServerPort}{_apiControllerRoutePrefix}/Logout";
 
                 var restServiceResult = await _restClient.MakeApiCall(restUrl, HttpMethod.Post, accessToken: authorizedUser.AccessToken);
 
@@ -121,10 +114,6 @@ namespace MusicStoreMobile.Core.Services.Implementations
         {
             var serviceResult = new ServiceResult();
 
-            await Task.Delay(500);
-            serviceResult.Success = false;
-            return serviceResult;
-
             var getAuthorizedUserServiceResult = await _authorizedUserService.Get();
 
             serviceResult.Success = getAuthorizedUserServiceResult.Success;
@@ -157,16 +146,9 @@ namespace MusicStoreMobile.Core.Services.Implementations
         {
             var serviceResult = new ServiceResult();
 
-            await Task.Delay(5000);
+            var restUrl = $"{_ipServerPort}{_apiControllerRoutePrefix}/Register";
 
-            serviceResult.Success = false;
-            serviceResult.Error.Description = "12345";
-            return serviceResult;
-
-
-            var restUrl = $"{_ipServerPort}v1/account/register";
-
-            var restServiceResult = await _restClient.MakeApiCall(restUrl, HttpMethod.Post);
+            var restServiceResult = await _restClient.MakeApiCall(restUrl, HttpMethod.Post, applicationUser);
 
             serviceResult.Success = restServiceResult.Success;
 
@@ -190,7 +172,7 @@ namespace MusicStoreMobile.Core.Services.Implementations
             {
                 var authorizedUser = getAuthorizedUserServiceResult.Result;
 
-                var restUrl = $"{_ipServerPort}v1/account/changePassword";
+                var restUrl = $"{_ipServerPort}{_apiControllerRoutePrefix}/ChangePassword";
 
                 var restServiceResult = await _restClient.MakeApiCall<object>
                 (

@@ -15,4 +15,6 @@ namespace MusicStoreMobile.Core.Models
         public DateTime AccessTokenExpires { get; set; }
         
     }
+
+
 }

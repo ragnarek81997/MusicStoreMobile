@@ -21,13 +21,13 @@ namespace MusicStoreMobile.Core.Rest.Implementations
             _jsonConverter = jsonConverter;
         }
 
-        public async Task<ServiceResult<TResult>> MakeApiCall<TResult>(string url, HttpMethod method, object data = null, ByteArrayContent byteData = null, string accessToken = "") where TResult : class
+        public async Task<ServiceResult<TResult>> MakeApiCall<TResult>(string url, HttpMethod method, object data = null, string accessToken = "") where TResult : class
         {
             var serviceResult = new ServiceResult<TResult>();
 
             if (CrossConnectivity.Current.IsConnected)
             {
-                url = url.Replace("http://", "https://");
+                //url = url.Replace("http://", "https://");
 
                 using (var httpClient = new HttpClient(new NativeMessageHandler { UseCookies = false }))
                 {
@@ -38,22 +38,25 @@ namespace MusicStoreMobile.Core.Rest.Implementations
                         // add content
                         if (method != HttpMethod.Get)
                         {
-                            using (var multipartFormDataContent = new MultipartFormDataContent())
+                            //if (data is ByteArrayContent)
+                            //{
+                            //    using (var multipartFormDataContent = new MultipartFormDataContent())
+                            //    {
+                            //        multipartFormDataContent.Add(data as ByteArrayContent, "file", "file.data");
+                            //        request.Content = multipartFormDataContent;
+                            //    }
+                            //}
+                            //else 
+                            if(data is ByteArrayContent)
+                            {
+                                request.Content = data as ByteArrayContent;
+                            }
+                            else
                             {
                                 var json = _jsonConverter.SerializeObject(data);
                                 var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
-
-								if (byteData != null)
-								{
-                                    multipartFormDataContent.Add(stringContent, "model");
-                                    multipartFormDataContent.Add(byteData, "file", "file.data");
-                                    request.Content = multipartFormDataContent;
-                                }
-                                else
-                                {
-                                    request.Content = stringContent;
-                                }
-							}
+                                request.Content = stringContent;
+                            }
                         }
 
                         HttpResponseMessage response = new HttpResponseMessage();
@@ -104,15 +107,17 @@ namespace MusicStoreMobile.Core.Rest.Implementations
             return serviceResult;
         }
 
-        public async Task<ServiceResult> MakeApiCall(string url, HttpMethod method, object data = null, ByteArrayContent byteData = null, string accessToken = "")
+        public async Task<ServiceResult> MakeApiCall(string url, HttpMethod method, object data = null, string accessToken = "")
         {
             var serviceResult = new ServiceResult();
 
-            var result = await MakeApiCall<object>(url, method, data, byteData, accessToken);
+            var result = await MakeApiCall<object>(url, method, data, accessToken);
 
             serviceResult.Success = result.Success;
-            if(!serviceResult.Success)
+            if (!serviceResult.Success)
+            {
                 serviceResult.Error = result.Error;
+            }
 
             return serviceResult;
         }

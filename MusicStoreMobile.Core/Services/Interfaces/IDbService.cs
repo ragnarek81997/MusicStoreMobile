@@ -1,4 +1,5 @@
-﻿using MusicStoreMobile.Core.ViewModelResults;
+﻿using MusicStoreMobile.Core.Enums;
+using MusicStoreMobile.Core.ViewModelResults;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace MusicStoreMobile.Core.Services.Interfaces
 {
     public interface IDbService
     {
-        Task<ServiceResult> CheckDb();
-        Task<ServiceResult<IEnumerable<string>>> GetAllKeys();
-        Task<ServiceResult<T>> GetObject<T>(string token);
-        Task<ServiceResult> RemoveObject(string token);
-        Task<ServiceResult> SaveObject<T>(T obj, string token);
+        Task<ServiceResult> CheckDb(BlobCacheType blobCache = BlobCacheType.LocalMachine);
+        Task<ServiceResult<IEnumerable<string>>> GetAllKeys(BlobCacheType blobCache = BlobCacheType.LocalMachine);
+        Task<ServiceResult<T>> GetObject<T>(string token, BlobCacheType blobCache = BlobCacheType.LocalMachine);
+        Task<ServiceResult> RemoveObject(string token, BlobCacheType blobCache = BlobCacheType.LocalMachine);
+        Task<ServiceResult> SaveObject<T>(T obj, string token, BlobCacheType blobCache = BlobCacheType.LocalMachine);
     }
 }
