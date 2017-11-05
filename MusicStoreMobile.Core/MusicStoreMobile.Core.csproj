@@ -37,6 +37,11 @@
     <Compile Include="Helpers\Implementations\ValidationHelper.cs" />
     <Compile Include="Helpers\Interfaces\IValidationHelper.cs" />
     <Compile Include="Models\GenreModel.cs" />
+    <Compile Include="Models\Link\LinkModel.cs" />
+    <Compile Include="Models\Link\TorrentInfoModel.cs" />
+    <Compile Include="Models\Link\TorrentLinkModel.cs" />
+    <Compile Include="Models\Link\UrlLinkModel.cs" />
+    <Compile Include="Models\PlaylistModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Services\Implementations\AuthorizedUserService.cs" />
