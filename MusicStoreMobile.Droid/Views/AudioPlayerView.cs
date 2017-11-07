@@ -57,6 +57,7 @@ namespace MusicStoreMobile.Droid.Views
                     await ViewModel.MediaPlayer.Play(ViewModel.CurrentTrack);
                 });
             }
+
             return view;
         }
 

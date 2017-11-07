@@ -23,16 +23,16 @@ namespace MusicStoreMobile.Core.ViewModels
             ShowContentViewModelCommand = new MvxAsyncCommand(async () => 
             {
                 var serviceResult = await _authService.Authorize();
-                if (!serviceResult.Success)
+                if (serviceResult.Success)
                 {
                     await _navigationService.Navigate<LoginViewModel>();
                 }
                 else
                 {
-                    await Task.Run(() => { });
+                    await _navigationService.Navigate<TorrentViewModel>(); 
                 }
 
-                await _navigationService.Navigate<AudioPlayerViewModel>();
+                //await _navigationService.Navigate<AudioPlayerViewModel>();
             });
         }
 

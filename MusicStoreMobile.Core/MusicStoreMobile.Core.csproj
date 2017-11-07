@@ -38,7 +38,6 @@
     <Compile Include="Helpers\Interfaces\IValidationHelper.cs" />
     <Compile Include="Models\GenreModel.cs" />
     <Compile Include="Models\Link\LinkModel.cs" />
-    <Compile Include="Models\Link\TorrentInfoModel.cs" />
     <Compile Include="Models\Link\TorrentLinkModel.cs" />
     <Compile Include="Models\Link\UrlLinkModel.cs" />
     <Compile Include="Models\PlaylistModel.cs" />
@@ -52,6 +51,7 @@
     <Compile Include="Services\Interfaces\IAuthService.cs" />
     <Compile Include="Validators\NCFieldRequiredAttribute.cs" />
     <Compile Include="Validators\NCFieldRequiredValidation.cs" />
+    <Compile Include="ViewModels\TorrentViewModel.cs" />
     <Compile Include="ViewModels\AudioPlayerViewModel.cs" />
     <Compile Include="ViewModels\Auth\RegistationViewModel.cs" />
     <Compile Include="ViewModels\Auth\LoginViewModel.cs" />

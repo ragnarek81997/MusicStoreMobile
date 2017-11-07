@@ -266,6 +266,7 @@
     <Compile Include="Controls\IOnBackPressedListener.cs" />
     <Compile Include="Converters\InputLineColorValueConverter.cs" />
     <Compile Include="Helpers\FocusablePropertyHelper.cs" />
+    <Compile Include="Helpers\SHA1Util.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="MvxBindings\ValidationEditTextViewTargetBinding.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -282,6 +283,7 @@
     <Compile Include="Controls\RecyclerViewOnScrollListener.cs" />
     <Compile Include="MvxBindings\SwipeRefreshLayoutIsRefreshingTargetBinding.cs" />
     <Compile Include="Helpers\KeyboardUtils.cs" />
+    <Compile Include="Views\TorrentView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -295,6 +297,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\AudioPlayerView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\TorrentView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -318,6 +323,10 @@
     <ProjectReference Include="..\MusicStoreMobile.Core\MusicStoreMobile.Core.csproj">
       <Project>{dece7897-83cc-431c-b87e-d61901d0a629}</Project>
       <Name>MusicStoreMobile.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="AndroidBindings\LibTorrent\LibTorrent.csproj">
+      <Project>{c3646ec4-2e75-4a96-a3b6-b27d90f4feea}</Project>
+      <Name>LibTorrent</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -8824,6 +8824,9 @@ namespace MusicStoreMobile.Droid
 			// aapt resource value: 0x7f030044
 			public const int tooltip = 2130903108;
 			
+			// aapt resource value: 0x7f030045
+			public const int TorrentView = 2130903109;
+			
 			static Layout()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

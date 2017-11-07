@@ -8,7 +8,6 @@ namespace MusicStoreMobile.Core.Models.Link
 {
     public class TorrentLinkModel : LinkModel
     {
-        public TorrentInfoModel Info { get; set; }
-        string Announce { get; set; }
+        public byte[] Torrent { get; set; }
     }
 }

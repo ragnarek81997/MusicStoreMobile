@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicStoreMobile.Core", "MusicStoreMobile.Core\MusicStoreMobile.Core.csproj", "{DECE7897-83CC-431C-B87E-D61901D0A629}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.MediaManager.Abstractions", "MediaManager.Abstractions\Plugin.MediaManager.Abstractions.csproj", "{6EDB0588-FFC5-4EF5-8A99-9E241D0F878D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.MediaManager.Android", "MediaManager.Android\Plugin.MediaManager.Android.csproj", "{56A56F17-7DE1-4CA1-9617-BF32E971AC84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibTorrent", "MusicStoreMobile.Droid\AndroidBindings\LibTorrent\LibTorrent.csproj", "{C3646EC4-2E75-4A96-A3B6-B27D90F4FEEA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,6 +91,18 @@ Global
 		{56A56F17-7DE1-4CA1-9617-BF32E971AC84}.Release|iPhone.Build.0 = Release|Any CPU
 		{56A56F17-7DE1-4CA1-9617-BF32E971AC84}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{56A56F17-7DE1-4CA1-9617-BF32E971AC84}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{C3646EC4-2E75-4A96-A3B6-B27D90F4FEEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3646EC4-2E75-4A96-A3B6-B27D90F4FEEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3646EC4-2E75-4A96-A3B6-B27D90F4FEEA}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{C3646EC4-2E75-4A96-A3B6-B27D90F4FEEA}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{C3646EC4-2E75-4A96-A3B6-B27D90F4FEEA}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{C3646EC4-2E75-4A96-A3B6-B27D90F4FEEA}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{C3646EC4-2E75-4A96-A3B6-B27D90F4FEEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3646EC4-2E75-4A96-A3B6-B27D90F4FEEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3646EC4-2E75-4A96-A3B6-B27D90F4FEEA}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{C3646EC4-2E75-4A96-A3B6-B27D90F4FEEA}.Release|iPhone.Build.0 = Release|Any CPU
+		{C3646EC4-2E75-4A96-A3B6-B27D90F4FEEA}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{C3646EC4-2E75-4A96-A3B6-B27D90F4FEEA}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
