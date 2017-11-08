@@ -155,6 +155,12 @@
     <Reference Include="Plugin.Connectivity.Abstractions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xam.Plugin.Connectivity.3.0.3\lib\MonoAndroid10\Plugin.Connectivity.Abstractions.dll</HintPath>
     </Reference>
+    <Reference Include="Plugin.MediaManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Plugin.MediaManager.0.4.5\lib\MonoAndroid\Plugin.MediaManager.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.MediaManager.Abstractions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Plugin.MediaManager.0.4.5\lib\MonoAndroid\Plugin.MediaManager.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="Splat, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Splat.2.0.0\lib\MonoAndroid403\Splat.dll</HintPath>
     </Reference>
@@ -312,14 +318,6 @@
     <AndroidResource Include="Resources\values-v21\Themes.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MediaManager.Abstractions\Plugin.MediaManager.Abstractions.csproj">
-      <Project>{6edb0588-ffc5-4ef5-8a99-9e241d0f878d}</Project>
-      <Name>Plugin.MediaManager.Abstractions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MediaManager.Android\Plugin.MediaManager.Android.csproj">
-      <Project>{56a56f17-7de1-4ca1-9617-bf32e971ac84}</Project>
-      <Name>Plugin.MediaManager.Android</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MusicStoreMobile.Core\MusicStoreMobile.Core.csproj">
       <Project>{dece7897-83cc-431c-b87e-d61901d0a629}</Project>
       <Name>MusicStoreMobile.Core</Name>
