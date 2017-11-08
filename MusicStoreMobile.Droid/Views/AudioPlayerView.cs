@@ -40,10 +40,10 @@ namespace MusicStoreMobile.Droid.Views
                     //Path.Combine(rootDirectory, "03.mp3"),
                     //Path.Combine(rootDirectory, "04.mp3"),
                     //Path.Combine(rootDirectory, "05.mp3")
-                    "https://freemusicarchive.org/music/download/642b476bac3bb1c6bd923c23e7f5f29e6d844eb0",
-                    "https://ia800806.us.archive.org/15/items/Mp3Playlist_555/AaronNeville-CrazyLove.mp3",
-                    "https://s3.eu-central-1.amazonaws.com/mp3-test-files/sample.mp3",
-                    "https://freemusicarchive.org/music/download/c903239ac7ab85c4743f68b6460576e064c0d587"
+                   "https://ia800806.us.archive.org/15/items/Mp3Playlist_555/AaronNeville-CrazyLove.mp3",
+                "https://s3.eu-central-1.amazonaws.com/mp3-test-files/sample.mp3",
+                "http://www.bensound.org/bensound-music/bensound-goinghigher.mp3",
+                "http://www.bensound.org/bensound-music/bensound-tenderness.mp3"
                     };
 
                     foreach (var mediaUrl in mediaUrls)
@@ -51,10 +51,10 @@ namespace MusicStoreMobile.Droid.Views
 
                         //Local перевіряє наявність файлів, якщо не існує, видаляє з черги
                         //Remote не перевіряж наявність файлів, якщо не існує, намагається відтврити, якщо дійшла її черга
-                        ViewModel.Queue.Add(new MediaFile(mediaUrl, Plugin.MediaManager.Abstractions.Enums.MediaFileType.Audio, Plugin.MediaManager.Abstractions.Enums.ResourceAvailability.Local));
+                        ViewModel.Queue.Add(new MediaFile(mediaUrl, Plugin.MediaManager.Abstractions.Enums.MediaFileType.Audio, Plugin.MediaManager.Abstractions.Enums.ResourceAvailability.Remote));
                     }
 
-                    ViewModel.Queue.Repeat = RepeatType.RepeatAll;
+                    //ViewModel.Queue.Repeat = RepeatType.RepeatAll;
 
                     ParentActivity?.RunOnUiThread(() => ViewModel.RaiseAllPropertiesChanged());
 
