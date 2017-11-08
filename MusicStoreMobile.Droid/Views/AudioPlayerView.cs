@@ -35,11 +35,15 @@ namespace MusicStoreMobile.Droid.Views
 
                     var mediaUrls =
                     new[] {
-                    Path.Combine(rootDirectory, "01.mp3"),
-                    Path.Combine(rootDirectory, "02.mp3"),
-                    Path.Combine(rootDirectory, "03.mp3"),
-                    Path.Combine(rootDirectory, "04.mp3"),
-                    Path.Combine(rootDirectory, "05.mp3")
+                    //Path.Combine(rootDirectory, "01.mp3"),
+                    //Path.Combine(rootDirectory, "02.mp3"),
+                    //Path.Combine(rootDirectory, "03.mp3"),
+                    //Path.Combine(rootDirectory, "04.mp3"),
+                    //Path.Combine(rootDirectory, "05.mp3")
+                    "https://freemusicarchive.org/music/download/642b476bac3bb1c6bd923c23e7f5f29e6d844eb0",
+                    "https://ia800806.us.archive.org/15/items/Mp3Playlist_555/AaronNeville-CrazyLove.mp3",
+                    "https://s3.eu-central-1.amazonaws.com/mp3-test-files/sample.mp3",
+                    "https://freemusicarchive.org/music/download/c903239ac7ab85c4743f68b6460576e064c0d587"
                     };
 
                     foreach (var mediaUrl in mediaUrls)
