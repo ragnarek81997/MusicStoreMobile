@@ -151,19 +151,13 @@ namespace Plugin.MediaManager
 
         private void AddActionButtons(bool mediaIsPlaying)
         {
-            if(_builder.MActions.Count > 0)
-            {
-                _builder.MActions.Clear();
-            }
-            if (_builder.MActions.Count == 0)
-            {
-                _builder
-                    .AddAction(GenerateActionCompat(Resource.Drawable.ic_skip_previous, "Previous", MediaServiceBase.ActionPrevious))
-                    .AddAction(mediaIsPlaying
-                        ? GenerateActionCompat(Resource.Drawable.ic_pause, "Pause", MediaServiceBase.ActionPause)
-                        : GenerateActionCompat(Resource.Drawable.ic_play_arrow, "Play", MediaServiceBase.ActionPlay))
-                    .AddAction(GenerateActionCompat(Resource.Drawable.ic_skip_next, "Next", MediaServiceBase.ActionNext));
-            }
+            _builder.MActions.Clear();
+            _builder
+                .AddAction(GenerateActionCompat(Resource.Drawable.ic_skip_previous, "Previous", MediaServiceBase.ActionPrevious))
+                .AddAction(mediaIsPlaying
+                    ? GenerateActionCompat(Resource.Drawable.ic_pause, "Pause", MediaServiceBase.ActionPause)
+                    : GenerateActionCompat(Resource.Drawable.ic_play_arrow, "Play", MediaServiceBase.ActionPlay))
+                .AddAction(GenerateActionCompat(Resource.Drawable.ic_skip_next, "Next", MediaServiceBase.ActionNext));
 
             //// Add previous/next button based on media queue
             //var canGoPrevious = MediaQueue?.HasPrevious() ?? false;

@@ -80,11 +80,7 @@ namespace Plugin.MediaManager.MediaSession
 
                     RemoteComponentName = new ComponentName(packageName, new RemoteControlBroadcastReceiver().ComponentName);
                     
-                    //TODO: пофіксити, виключення в конструкторі
-                    Android.App.Application.SynchronizationContext.Send(delegate
-                    {
-                        mediaSessionCompat = new MediaSessionCompat(applicationContext, "MusicStoreAudio", RemoteComponentName, pIntent);
-                    }, null);
+                    mediaSessionCompat = new MediaSessionCompat(applicationContext, "MusicStoreAudio", RemoteComponentName, pIntent);
 
                     UpdateAndroidNotificationManagerSettings();
 
@@ -142,7 +138,6 @@ namespace Plugin.MediaManager.MediaSession
         /// <param name="position"></param>
         public void UpdatePlaybackState(int state, int position = 0, string errorMessage = "")
         {
-            //TODO: дослідити, чому без чього метода не працює (працює не стабільно)
             Android.App.Application.SynchronizationContext.Send(delegate
             {
                 if (CurrentSession == null && (_binder?.IsBinderAlive).GetValueOrDefault(false) && !string.IsNullOrWhiteSpace(_packageName))
@@ -181,9 +176,9 @@ namespace Plugin.MediaManager.MediaSession
                 RemoteControlClient remoteControlClient = (RemoteControlClient)CurrentSession?.RemoteControlClient;
 
                 RemoteControlFlags flags = RemoteControlFlags.Play
-                                           | RemoteControlFlags.Pause
-                                           | RemoteControlFlags.PlayPause
-                                           | RemoteControlFlags.FastForward;
+                                            | RemoteControlFlags.Pause
+                                            | RemoteControlFlags.PlayPause
+                                            | RemoteControlFlags.FastForward;
 
                 remoteControlClient?.SetTransportControlFlags(flags);
             }, null);
