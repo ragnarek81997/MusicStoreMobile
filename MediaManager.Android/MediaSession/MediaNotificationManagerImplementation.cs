@@ -77,8 +77,10 @@ namespace Plugin.MediaManager
             //if (_builder.MActions.Count == 1)
             //    ((NotificationCompat.MediaStyle)(_builder.MStyle)).SetShowActionsInCompactView(0);
 
-            NotificationManagerCompat.From(_applicationContext)
-                .Notify(_notificationId, _builder.Build());
+            var notification = _builder.Build();
+            CheckSmallIconInMIUI(notification);
+
+            NotificationManagerCompat.From(_applicationContext).Notify(_notificationId, notification);
         }
 
         public void StopNotifications()
@@ -102,7 +104,11 @@ namespace Plugin.MediaManager
                     SetMetadata(mediaFile);
                     AddActionButtons(isPlaying);
                     _builder.SetOngoing(isPersistent);
-                    nm.Notify(_notificationId, _builder.Build());
+
+                    var notification = _builder.Build();
+                    CheckSmallIconInMIUI(notification);
+
+                    nm.Notify(_notificationId, notification);
                 }
                 else
                 {
@@ -176,6 +182,27 @@ namespace Plugin.MediaManager
             //    _builder.AddAction(GenerateActionCompat(Resource.Drawable.IcMediaNext, "Next",
             //        MediaServiceBase.ActionNext));
             //}
+        }
+
+        private bool CheckSmallIconInMIUI(Notification notification)
+        {
+            try
+            {
+                Java.Lang.Class miuiNotificationClass = Java.Lang.Class.ForName("android.app.MiuiNotification");
+                Java.Lang.Object miuiNotification = miuiNotificationClass.NewInstance();
+                Java.Lang.Reflect.Field field = miuiNotification.Class.GetDeclaredField("customizedIcon");
+                field.Accessible = true;
+                field.Set(miuiNotification, true);
+                field = notification.Class.GetField("extraNotification");
+                field.Accessible = true;
+                field.Set(notification, miuiNotification);
+
+                return true;
+            }
+            catch (Java.Lang.Exception e)
+            {
+                return false;
+            }
         }
     }
 }

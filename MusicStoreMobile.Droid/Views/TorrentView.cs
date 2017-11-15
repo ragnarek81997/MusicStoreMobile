@@ -29,26 +29,43 @@ namespace MusicStoreMobile.Droid.Views
             var view = base.OnCreateView(inflater, container, savedInstanceState);
             if (savedInstanceState == null)
             {
-                //при старті сервісу
-                Libtorrent.Libtorrent.Create();
-
-                var downloadDirectory = Android.OS.Environment.GetExternalStoragePublicDirectory(string.Empty).AbsolutePath;
-
-                //отримувати торрент з сервера
-                var torrentInfo = new TorrentLinkModel();
-                var torrent = Libtorrent.Libtorrent.AddTorrentFromBytes(downloadDirectory, torrentInfo.Torrent);
-
-                Libtorrent.Libtorrent.StartTorrent(torrent);
-                while (Libtorrent.Libtorrent.TorrentStatus(torrent) == Libtorrent.Libtorrent.StatusDownloading)
+                Task.Run(() =>
                 {
-                    Task.Delay(1000).GetAwaiter().GetResult();
-                    var progress = (((double)((long)((Libtorrent.Libtorrent.TorrentBytesCompleted(torrent)) / ((double)Libtorrent.Libtorrent.TorrentBytesLength(torrent)) * 10000))) / 100);
-                }
-                //ставити на паузу, не роздавати
-                Libtorrent.Libtorrent.StopTorrent(torrent);
+                    Libtorrent.Libtorrent.Create();
+                    try
+                    {
+                        var downloadDirectory = Android.OS.Environment.GetExternalStoragePublicDirectory(string.Empty).AbsolutePath;
 
-                //при завершенні сервісу 
-                Libtorrent.Libtorrent.Close();
+                        //отримувати торрент з сервера
+                        var torrentInfo = new TorrentLinkModel();
+
+                        var torrent = Libtorrent.Libtorrent.AddTorrentFromBytes(downloadDirectory, torrentInfo.Torrent);
+                        if (torrent == -1) throw new ArgumentNullException();
+
+                        Libtorrent.Libtorrent.StartTorrent(torrent);
+                        while (Libtorrent.Libtorrent.TorrentStatus(torrent) == Libtorrent.Libtorrent.StatusDownloading)
+                        {
+                            Task.Delay(1000).GetAwaiter().GetResult();
+                            var bytesCompleted = Libtorrent.Libtorrent.TorrentBytesCompleted(torrent);
+                            var bytesLength = 1L;
+                            if (bytesCompleted > 0)
+                            {
+                                bytesLength = Libtorrent.Libtorrent.TorrentBytesLength(torrent);
+                            }
+                            var progress = (((double)((long)((bytesCompleted) / ((double)bytesLength) * 10000))) / 100);
+                        }
+                        //ставити на паузу, не роздавати
+                        Libtorrent.Libtorrent.StopTorrent(torrent);
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                    finally
+                    {
+                        Libtorrent.Libtorrent.Close();
+                    }
+                });
             }
 
             return view;

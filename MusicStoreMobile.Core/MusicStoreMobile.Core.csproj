@@ -33,6 +33,7 @@
     <Compile Include="Controls\ObservableDictionary.cs" />
     <Compile Include="Converters\IsTaskExecutedValueConverter.cs" />
     <Compile Include="Converters\InvertedValueConverter.cs" />
+    <Compile Include="Converters\DateTimeJsonConverter.cs" />
     <Compile Include="Enums\BlobCacheType.cs" />
     <Compile Include="Helpers\Implementations\ValidationHelper.cs" />
     <Compile Include="Helpers\Interfaces\IValidationHelper.cs" />

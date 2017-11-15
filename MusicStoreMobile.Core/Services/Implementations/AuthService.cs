@@ -121,7 +121,7 @@ namespace MusicStoreMobile.Core.Services.Implementations
             if (getAuthorizedUserServiceResult.Success)
             {
                 var authorizedUser = getAuthorizedUserServiceResult.Result;
-                if (authorizedUser.AccessTokenExpires > DateTime.Now)
+                if (authorizedUser.AccessTokenExpires == null || authorizedUser?.AccessTokenExpires < DateTime.Now)
                 {
                     serviceResult.Success = false;
                     serviceResult.Error.Description = "Token expired.";

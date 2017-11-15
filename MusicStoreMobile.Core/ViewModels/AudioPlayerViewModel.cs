@@ -1,4 +1,5 @@
 ﻿using MusicStoreMobile.Core.Services.Implementations;
+using MusicStoreMobile.Core.ViewModelResults;
 using Plugin.MediaManager;
 using Plugin.MediaManager.Abstractions;
 using Plugin.MediaManager.Abstractions.Enums;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace MusicStoreMobile.Core.ViewModels
 {
-    public class AudioPlayerViewModel : BaseViewModel
+    public class AudioPlayerViewModel : BaseViewModel<DestructionResult>
     {
         public AudioPlayerViewModel()
         {
@@ -44,6 +45,12 @@ namespace MusicStoreMobile.Core.ViewModels
             //InvokeOnMainThread(() => RaiseAllPropertiesChanged());
 
             return base.Initialize();
+        }
+
+        public override void ViewDestroy()
+        {
+            MediaNotificationManager?.StopNotifications();
+            base.ViewDestroy();
         }
 
         // MVVM Properties
@@ -112,6 +119,8 @@ namespace MusicStoreMobile.Core.ViewModels
         public string PlayingText => $"Playing: {(Queue.Index + 1)} of {Queue.Count}";
 
         private IPlaybackController PlaybackController => MediaPlayer.PlaybackController;
+
+        private IMediaNotificationManager MediaNotificationManager => MediaPlayer.MediaNotificationManager;
 
         // MVVM Commands
 
