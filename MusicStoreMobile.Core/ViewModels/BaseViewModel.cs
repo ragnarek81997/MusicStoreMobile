@@ -2,6 +2,9 @@
 using MvvmCross.Core.ViewModels;
 using MusicStoreMobile.Core.Resources;
 using System.Threading.Tasks;
+using MvvmCross.Platform.Exceptions;
+using MvvmCross.Platform.Platform;
+using MvvmCross.Platform;
 
 namespace MusicStoreMobile.Core.ViewModels
 {
@@ -11,41 +14,44 @@ namespace MusicStoreMobile.Core.ViewModels
         {
         }
 
-        /// <summary>
-        /// Gets the internationalized string at the given <paramref name="index"/>, which is the key of the resource.
-        /// </summary>
-        /// <param name="index">Index key of the string from the resources of internationalized strings.</param>
         public string this[string index] => Strings.ResourceManager.GetString(index);
     }
 
-    public abstract class BaseViewModel<TParameter, TResult> : MvxViewModel<TParameter, TResult>
-        where TParameter : class
-        where TResult : class
+    public abstract class BaseViewModel<TParameter> : BaseViewModel, IMvxViewModel<TParameter>
     {
-        protected BaseViewModel()
+        public async Task Init(string parameter)
         {
+            if (!string.IsNullOrEmpty(parameter))
+            {
+                IMvxJsonConverter serializer;
+                if (!Mvx.TryResolve(out serializer))
+                {
+                    throw new MvxIoCResolveException("There is no implementation of IMvxJsonConverter registered. You need to use the MvvmCross Json plugin or create your own implementation of IMvxJsonConverter.");
+                }
 
+                var deserialized = serializer.DeserializeObject<TParameter>(parameter);
+                Prepare(deserialized);
+                await Initialize();
+            }
         }
 
-        /// <summary>
-        /// Gets the internationalized string at the given <paramref name="index"/>, which is the key of the resource.
-        /// </summary>
-        /// <param name="index">Index key of the string from the resources of internationalized strings.</param>
-        public string this[string index] => Strings.ResourceManager.GetString(index);
+        public abstract void Prepare(TParameter parameter);
     }
 
-    public abstract class BaseViewModel<TResult> : MvxViewModelResult<TResult>
-        where TResult : class
+    public abstract class BaseViewModelResult<TResult> : BaseViewModel, IMvxViewModelResult<TResult>
     {
-        protected BaseViewModel()
+        public TaskCompletionSource<object> CloseCompletionSource { get; set; }
+
+        public override void ViewDestroy()
         {
-
+            if (CloseCompletionSource != null && !CloseCompletionSource.Task.IsCompleted && !CloseCompletionSource.Task.IsFaulted)
+                CloseCompletionSource?.TrySetCanceled();
+            base.ViewDestroy();
         }
+    }
 
-        /// <summary>
-        /// Gets the internationalized string at the given <paramref name="index"/>, which is the key of the resource.
-        /// </summary>
-        /// <param name="index">Index key of the string from the resources of internationalized strings.</param>
-        public string this[string index] => Strings.ResourceManager.GetString(index);
+    public abstract class BaseViewModel<TParameter, TResult> : BaseViewModelResult<TResult>, IMvxViewModel<TParameter, TResult>
+    {
+        public abstract void Prepare(TParameter parameter);
     }
 }

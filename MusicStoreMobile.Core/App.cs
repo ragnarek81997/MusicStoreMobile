@@ -8,6 +8,8 @@ using MusicStoreMobile.Core.ViewModels;
 using Acr.UserDialogs;
 using System.Threading.Tasks;
 using Akavache;
+using MusicStoreMobile.Core.Helpers.Interfaces;
+using MusicStoreMobile.Core.Helpers.Implementations;
 
 namespace MusicStoreMobile.Core
 {
@@ -28,6 +30,8 @@ namespace MusicStoreMobile.Core
             Mvx.RegisterSingleton(() => UserDialogs.Instance);
 
             Mvx.RegisterType<IValidator, Validator>();
+            Mvx.RegisterType<INavigationFragmentManager, NavigationFragmentManager>();
+            
 
             BlobCache.ApplicationName = "MusicStoreMobile";
 

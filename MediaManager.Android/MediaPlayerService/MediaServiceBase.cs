@@ -155,7 +155,7 @@ namespace Plugin.MediaManager
             await Task.Run(() =>
             {
                 SessionManager.UpdatePlaybackState(PlaybackStateCompat.StateStopped, Position.Seconds);
-                SessionManager.NotificationManager.StopNotifications();
+                //SessionManager.NotificationManager.StopNotifications();
                 StopForeground(true);
                 ReleaseWifiLock();
                 SessionManager.Release();

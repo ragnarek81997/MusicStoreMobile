@@ -1,4 +1,5 @@
 ﻿using Acr.UserDialogs;
+using MusicStoreMobile.Core.Helpers.Interfaces;
 using MusicStoreMobile.Core.Services.Interfaces;
 using MusicStoreMobile.Core.ViewModelResults;
 using MusicStoreMobile.Core.ViewModels.Auth;
@@ -14,13 +15,13 @@ namespace MusicStoreMobile.Core.ViewModels
     {
         private readonly IMvxNavigationService _navigationService;
         private readonly IAuthService _authService;
+        private readonly INavigationFragmentManager _navigationFragmentManager;
 
-        private CancellationTokenSource _audioPlayerTokenSource;
-
-        public MainViewModel(IMvxNavigationService navigationService, IAuthService authService)
+        public MainViewModel(IMvxNavigationService navigationService, IAuthService authService, INavigationFragmentManager navigationFragmentManager)
         {
             _navigationService = navigationService;
             _authService = authService;
+            _navigationFragmentManager = navigationFragmentManager;
 
             ShowNavigationTopViewModelCommand = new MvxAsyncCommand(async () => await Task.Run(()=>{ }));
             ShowNavigationLeftViewModelCommand = new MvxAsyncCommand(async () => await Task.Run(() => { }));
@@ -34,8 +35,7 @@ namespace MusicStoreMobile.Core.ViewModels
                 }
                 else
                 {
-                    _audioPlayerTokenSource = new CancellationTokenSource();
-                    await _navigationService.Navigate<AudioPlayerViewModel, DestructionResult>(cancellationToken: _audioPlayerTokenSource.Token );
+                    await _navigationFragmentManager.Navigate<AudioPlayerViewModel, DestructionResult>();
                 }
             });
         }
@@ -48,7 +48,6 @@ namespace MusicStoreMobile.Core.ViewModels
 
         public override void ViewDestroy()
         {
-            _audioPlayerTokenSource?.Cancel();
             base.ViewDestroy();
         }
 

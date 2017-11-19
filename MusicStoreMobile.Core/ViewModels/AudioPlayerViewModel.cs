@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace MusicStoreMobile.Core.ViewModels
 {
-    public class AudioPlayerViewModel : BaseViewModel<DestructionResult>
+    public class AudioPlayerViewModel : BaseViewModelResult<DestructionResult>
     {
         public AudioPlayerViewModel()
         {
@@ -27,29 +27,12 @@ namespace MusicStoreMobile.Core.ViewModels
 
         public override Task Initialize()
         {
-            //Queue.Clear();
-
-            //var mediaUrls =
-            //new[] {
-            //    "https://freemusicarchive.org/music/download/642b476bac3bb1c6bd923c23e7f5f29e6d844eb0",
-            //    "https://ia800806.us.archive.org/15/items/Mp3Playlist_555/AaronNeville-CrazyLove.mp3",
-            //    "https://s3.eu-central-1.amazonaws.com/mp3-test-files/sample.mp3",
-            //    "https://freemusicarchive.org/music/download/c903239ac7ab85c4743f68b6460576e064c0d587"
-            //};
-
-            //foreach (var mediaUrl in mediaUrls)
-            //{
-            //    Queue.Add(new MediaFile(mediaUrl, Plugin.MediaManager.Abstractions.Enums.MediaFileType.Audio, Plugin.MediaManager.Abstractions.Enums.ResourceAvailability.Remote));
-            //}
-
-            //InvokeOnMainThread(() => RaiseAllPropertiesChanged());
-
             return base.Initialize();
         }
 
         public override void ViewDestroy()
         {
-            MediaNotificationManager?.StopNotifications();
+            MediaNotificationManager.StopNotifications();
             base.ViewDestroy();
         }
 
@@ -57,6 +40,8 @@ namespace MusicStoreMobile.Core.ViewModels
 
         private readonly IMediaManager mediaPlayer;
         public IMediaManager MediaPlayer => mediaPlayer;
+
+        public IMediaNotificationManager MediaNotificationManager => MediaPlayer.MediaNotificationManager;
 
         public IMediaQueue Queue => mediaPlayer.MediaQueue;
 
@@ -119,8 +104,6 @@ namespace MusicStoreMobile.Core.ViewModels
         public string PlayingText => $"Playing: {(Queue.Index + 1)} of {Queue.Count}";
 
         private IPlaybackController PlaybackController => MediaPlayer.PlaybackController;
-
-        private IMediaNotificationManager MediaNotificationManager => MediaPlayer.MediaNotificationManager;
 
         // MVVM Commands
 

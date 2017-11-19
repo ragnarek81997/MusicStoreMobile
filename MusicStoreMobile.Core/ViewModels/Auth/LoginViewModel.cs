@@ -24,12 +24,16 @@ namespace MusicStoreMobile.Core.ViewModels.Auth
         private readonly IUserDialogs _userDialogs;
 
         private readonly IValidationHelper _validationHelper;
+        private readonly INavigationFragmentManager _navigationFragmentManager;
+        
 
-        public LoginViewModel(IMvxNavigationService navigationService, IAuthService authService, IUserDialogs userDialogs, IValidator validator)
+        public LoginViewModel(IMvxNavigationService navigationService, IAuthService authService, IUserDialogs userDialogs, IValidator validator, INavigationFragmentManager navigationFragmentManager)
         {
             _navigationService = navigationService;
             _authService = authService;
             _userDialogs = userDialogs;
+
+            _navigationFragmentManager = navigationFragmentManager;
 
             _validationHelper = new ValidationHelper(validator, this, Errors.Value, (propertyName) => { FocusName.Value = propertyName; });
 
@@ -46,6 +50,7 @@ namespace MusicStoreMobile.Core.ViewModels.Auth
                 {
                     LogInTask.Value = NotifyTaskCompletion.Create(AttemptLogInAsync);
                 }
+                _navigationFragmentManager.Close<AudioPlayerViewModel>();
             });
 
 			ShowRegistrationViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<RegistrationViewModel>());
