@@ -34,8 +34,10 @@
     <Compile Include="Converters\IsTaskExecutedValueConverter.cs" />
     <Compile Include="Converters\InvertedValueConverter.cs" />
     <Compile Include="Enums\BlobCacheType.cs" />
+    <Compile Include="Helpers\Implementations\DictionaryBlobCache.cs" />
     <Compile Include="Helpers\Implementations\NavigationFragmentManager.cs" />
     <Compile Include="Helpers\Implementations\ValidationHelper.cs" />
+    <Compile Include="Helpers\Interfaces\IDictionaryBlobCache.cs" />
     <Compile Include="Helpers\Interfaces\INavigationFragmentManager.cs" />
     <Compile Include="Helpers\Interfaces\IValidationHelper.cs" />
     <Compile Include="Models\GenreModel.cs" />
@@ -43,11 +45,13 @@
     <Compile Include="Models\PlaylistModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App.cs" />
+    <Compile Include="Services\Implementations\DictionaryDbService.cs" />
     <Compile Include="Services\Implementations\AuthorizedUserService.cs" />
-    <Compile Include="Services\Implementations\DbService.cs" />
+    <Compile Include="Services\Implementations\AkavacheDbService.cs" />
     <Compile Include="Services\Implementations\AuthService.cs" />
+    <Compile Include="Services\Interfaces\IDictionaryDbService.cs" />
     <Compile Include="Services\Interfaces\IAuthorizedUserService.cs" />
-    <Compile Include="Services\Interfaces\IDbService.cs" />
+    <Compile Include="Services\Interfaces\IAkavacheDbService.cs" />
     <Compile Include="Services\Interfaces\IAuthService.cs" />
     <Compile Include="Validators\NCFieldRequiredAttribute.cs" />
     <Compile Include="Validators\NCFieldRequiredValidation.cs" />

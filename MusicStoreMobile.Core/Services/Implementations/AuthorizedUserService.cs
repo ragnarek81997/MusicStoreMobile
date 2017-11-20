@@ -12,11 +12,11 @@ namespace MusicStoreMobile.Core.Services.Implementations
 {
     public class AuthorizedUserService : IAuthorizedUserService
     {
-        private readonly IDbService _dbService;
+        private readonly IAkavacheDbService _dbService;
 
         private string _authorizedUserToken;
 
-        public AuthorizedUserService(IDbService dbService)
+        public AuthorizedUserService(IAkavacheDbService dbService)
         {
             _dbService = dbService;
 

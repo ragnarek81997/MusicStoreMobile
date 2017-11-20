@@ -31,7 +31,7 @@ namespace MusicStoreMobile.Core
 
             Mvx.RegisterType<IValidator, Validator>();
             Mvx.RegisterType<INavigationFragmentManager, NavigationFragmentManager>();
-            
+            Mvx.RegisterType<IDictionaryBlobCache, DictionaryBlobCache>();
 
             BlobCache.ApplicationName = "MusicStoreMobile";
 

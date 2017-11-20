@@ -32,9 +32,11 @@ namespace MusicStoreMobile.Core.ViewModels
                 if (!serviceResult.Success)
                 {
                     await _navigationService.Navigate<LoginViewModel>();
+                    await _navigationFragmentManager.Navigate<AudioPlayerViewModel, DestructionResult>();
                 }
                 else
                 {
+                    await _navigationService.Navigate<LoginViewModel>();
                     await _navigationFragmentManager.Navigate<AudioPlayerViewModel, DestructionResult>();
                 }
             });

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MusicStoreMobile.Core.Services.Interfaces
 {
-    public interface IDbService
+    public interface IAkavacheDbService
     {
         Task<ServiceResult> CheckDb(BlobCacheType blobCache = BlobCacheType.LocalMachine);
         Task<ServiceResult<IEnumerable<string>>> GetAllKeys(BlobCacheType blobCache = BlobCacheType.LocalMachine);

@@ -1,4 +1,5 @@
 ﻿using MusicStoreMobile.Core.Helpers.Interfaces;
+using MusicStoreMobile.Core.Services.Interfaces;
 using MusicStoreMobile.Core.ViewModels;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
@@ -14,10 +15,11 @@ namespace MusicStoreMobile.Core.Helpers.Implementations
     public class NavigationFragmentManager : INavigationFragmentManager
     {
         private readonly IMvxNavigationService _navigationService;
-        private static Dictionary<Type, CancellationTokenSource> _viewModels = new Dictionary<Type, CancellationTokenSource>();
-        public NavigationFragmentManager(IMvxNavigationService navigationService)
+        private readonly IDictionaryDbService _dbService;
+        public NavigationFragmentManager(IMvxNavigationService navigationService, IDictionaryDbService dbService)
         {
             _navigationService = navigationService;
+            _dbService = dbService;
         }
 
         public async Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param, IMvxBundle presentationBundle = null) where TViewModel : BaseViewModel<TParameter, TResult>
@@ -25,7 +27,7 @@ namespace MusicStoreMobile.Core.Helpers.Implementations
             //await this.Close<TViewModel>();
             var cts = new CancellationTokenSource();
 
-            _viewModels.Add(typeof(TViewModel), cts);
+            await _dbService.SaveObject<CancellationTokenSource>(cts, Constants.DbTokens.NavigationFragmentManager + typeof(TViewModel).Name);
         
             return await _navigationService.Navigate<TViewModel, TParameter, TResult>(param, presentationBundle: presentationBundle, cancellationToken: cts.Token);
         }
@@ -34,26 +36,27 @@ namespace MusicStoreMobile.Core.Helpers.Implementations
             await this.Close<TViewModel>();
             var cts = new CancellationTokenSource();
 
-            _viewModels[typeof(TViewModel)] = cts;
+            await _dbService.SaveObject<CancellationTokenSource>(cts, Constants.DbTokens.NavigationFragmentManager + typeof(TViewModel).Name);
 
             return await _navigationService.Navigate<TViewModel, TResult>(presentationBundle: presentationBundle, cancellationToken: cts.Token);
         }
 
         public async Task Close<TViewModel>() where TViewModel : BaseViewModel
         {
-            await Task.Run(() =>
+            CancellationTokenSource cts = null;
+            try
             {
-                CancellationTokenSource cts = null;
-                try
+                var ctsResult = await _dbService.GetObject<CancellationTokenSource>(Constants.DbTokens.NavigationFragmentManager + typeof(TViewModel).Name);
+                if (ctsResult.Success)
                 {
-                    cts = _viewModels[typeof(TViewModel)];
-                    _viewModels.Remove(typeof(TViewModel));
+                    cts = ctsResult.Result;
                 }
-                catch (Exception)
-                {
-                }
-                cts?.Cancel();
-            });
+                await _dbService.RemoveObject(Constants.DbTokens.NavigationFragmentManager + typeof(TViewModel).Name);
+            }
+            catch (Exception)
+            {
+            }
+            cts?.Cancel();
         }
     }
 }
