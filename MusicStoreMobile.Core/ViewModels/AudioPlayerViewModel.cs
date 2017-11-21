@@ -1,5 +1,6 @@
 ﻿using MusicStoreMobile.Core.Services.Implementations;
 using MusicStoreMobile.Core.ViewModelResults;
+using MvvmCross.Core.ViewModels;
 using Plugin.MediaManager;
 using Plugin.MediaManager.Abstractions;
 using Plugin.MediaManager.Abstractions.Enums;
@@ -17,6 +18,33 @@ namespace MusicStoreMobile.Core.ViewModels
         public AudioPlayerViewModel()
         {
             mediaPlayer = CrossMediaManager.Current;
+
+            MediaPlayer.StatusChanged += (sender, e) =>
+            {
+                RaisePropertyChanged(() => Status);
+                RaisePropertyChanged(() => Position);
+            };
+
+            MediaPlayer.PlayingChanged += (sender, e) =>
+            {
+                RaisePropertyChanged(() => Position);
+            };
+
+            MediaPlayer.MediaQueue.QueueMediaChanged += (q_sender, q_e) => 
+            {
+                RaisePropertyChanged(() => PlayingText);
+                if (CurrentTrack != null)
+                {
+                    CurrentTrack.MetadataUpdated += (m_sender, m_e) =>
+                    {
+                        RaisePropertyChanged(() => PlayingText);
+                    };
+                }
+            };
+
+            PlayPauseCommand = new MvxAsyncCommand(async () => await PlaybackController.PlayPause());
+            SkipPreviousCommand = new MvxAsyncCommand(async () => await PlaybackController.PlayPreviousOrSeekToStart());
+            SkipNextCommand = new MvxAsyncCommand(async () => await PlaybackController.PlayNext());
         }
 
         // MvvmCross Lifecycle
@@ -32,7 +60,6 @@ namespace MusicStoreMobile.Core.ViewModels
 
         public override void ViewDestroy()
         {
-            MediaNotificationManager.StopNotifications();
             base.ViewDestroy();
         }
 
@@ -47,65 +74,35 @@ namespace MusicStoreMobile.Core.ViewModels
 
         public IMediaFile CurrentTrack => Queue.Current;
 
-        public int Duration => mediaPlayer.Duration.TotalSeconds > 0 ? Convert.ToInt32(mediaPlayer.Duration.TotalSeconds) : 0;
+        public MediaPlayerStatus Status => mediaPlayer.Status;
 
-        private bool _isSeeking = false;
-
-        public bool IsSeeking
+        public string PlayingText
         {
             get
             {
-                return _isSeeking;
-            }
-            set
-            {
-                // Put into an action so we can await the seek-command before we update the value. Prevents jumping of the progress-bar.
-                var a = new Action(async () =>
-                {
-                    // When disable user-seeking, update the position with the position-value
-                    if (value == false)
-                    {
-                        await mediaPlayer.Seek(TimeSpan.FromSeconds(Position));
-                    }
-
-                    _isSeeking = value;
-                });
-                a.Invoke();
+                if (CurrentTrack == null || CurrentTrack.Metadata == null) return string.Empty;
+                return CurrentTrack.Metadata.Artist + ((!string.IsNullOrWhiteSpace(CurrentTrack.Metadata.Artist) && !string.IsNullOrWhiteSpace(CurrentTrack.Metadata.Title))?(" - "):("")) + CurrentTrack.Metadata.Title;
             }
         }
 
-        private int _position;
+        public int Duration => mediaPlayer.Duration.TotalSeconds > 0 ? Convert.ToInt32(mediaPlayer.Duration.TotalSeconds) : 0;
 
         public int Position
         {
             get
             {
-                if (IsSeeking)
-                    return _position;
-
-                return mediaPlayer.Position.TotalSeconds > 0 ? Convert.ToInt32(mediaPlayer.Position.TotalSeconds) : 0;
-            }
-            set
-            {
-                _position = value;
-
-                RaisePropertyChanged( ()=> Position);
+                var result = (Duration > 0 ? ((int)((Convert.ToInt32(mediaPlayer.Position.TotalSeconds) / (double)Duration) * 1000)) : 0);
+                return result;
             }
         }
-
-        public int Downloaded => Convert.ToInt32(mediaPlayer.Buffered.TotalSeconds);
-
-        public bool IsPlaying => mediaPlayer.Status == MediaPlayerStatus.Playing || mediaPlayer.Status == MediaPlayerStatus.Buffering;
-
-        public MediaPlayerStatus Status => mediaPlayer.Status;
-
-        public object Cover => mediaPlayer.MediaQueue.Current.Metadata.AlbumArt;
-
-        public string PlayingText => $"Playing: {(Queue.Index + 1)} of {Queue.Count}";
 
         private IPlaybackController PlaybackController => MediaPlayer.PlaybackController;
 
         // MVVM Commands
+
+        public IMvxCommand PlayPauseCommand { get; private set; }
+        public IMvxCommand SkipPreviousCommand { get; private set; }
+        public IMvxCommand SkipNextCommand { get; private set; }
 
         // Private methods
 

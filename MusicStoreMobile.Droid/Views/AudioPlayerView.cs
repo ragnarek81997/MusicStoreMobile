@@ -22,9 +22,18 @@ namespace MusicStoreMobile.Droid.Views
     {
         protected override int FragmentId => Resource.Layout.AudioPlayerView;
 
+        private TextView _audioPlayerTitleText;
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var view = base.OnCreateView(inflater, container, savedInstanceState);
+
+            _audioPlayerTitleText = view.FindViewById<TextView>(Resource.Id.audio_player_title_text);
+            if(_audioPlayerTitleText != null)
+            {
+                //_audioPlayerTitleText.Selected = true;
+            }
+
             if (savedInstanceState == null)
             {
                 var rootDirectory = Path.Combine(Android.OS.Environment.GetExternalStoragePublicDirectory(string.Empty).AbsolutePath, ".MS");
@@ -64,6 +73,7 @@ namespace MusicStoreMobile.Droid.Views
 
         public override void OnDestroy()
         {
+            _audioPlayerTitleText?.Dispose();
             base.OnDestroy();
         }
     }

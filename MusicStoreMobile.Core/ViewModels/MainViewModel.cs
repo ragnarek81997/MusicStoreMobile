@@ -3,6 +3,7 @@ using MusicStoreMobile.Core.Helpers.Interfaces;
 using MusicStoreMobile.Core.Services.Interfaces;
 using MusicStoreMobile.Core.ViewModelResults;
 using MusicStoreMobile.Core.ViewModels.Auth;
+using MusicStoreMobile.Core.ViewModels.Navigation;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
@@ -24,21 +25,21 @@ namespace MusicStoreMobile.Core.ViewModels
             _navigationFragmentManager = navigationFragmentManager;
 
             ShowNavigationTopViewModelCommand = new MvxAsyncCommand(async () => await Task.Run(()=>{ }));
-            ShowNavigationLeftViewModelCommand = new MvxAsyncCommand(async () => await Task.Run(() => { }));
-            ShowNavigationBottomViewModelCommand = new MvxAsyncCommand(async () => await Task.Run(()=>{ }));
+            ShowAudioPlayerViewModelCommand = new MvxAsyncCommand(async () => await _navigationFragmentManager.Navigate<AudioPlayerViewModel, DestructionResult>());
+            ShowNavigationBottomViewModelCommand = new MvxAsyncCommand(async () => await _navigationFragmentManager.Navigate<BottomNavigationViewModel, DestructionResult>());
             ShowContentViewModelCommand = new MvxAsyncCommand(async () => 
             {
                 var serviceResult = await _authService.Authorize();
                 if (!serviceResult.Success)
                 {
                     await _navigationService.Navigate<LoginViewModel>();
-                    await _navigationFragmentManager.Navigate<AudioPlayerViewModel, DestructionResult>();
                 }
                 else
                 {
                     await _navigationService.Navigate<LoginViewModel>();
-                    await _navigationFragmentManager.Navigate<AudioPlayerViewModel, DestructionResult>();
                 }
+                ShowNavigationBottomViewModelCommand.Execute(null);
+                ShowAudioPlayerViewModelCommand.Execute(null);
             });
         }
 
@@ -57,7 +58,7 @@ namespace MusicStoreMobile.Core.ViewModels
 
         // MVVM Commands
         public IMvxAsyncCommand ShowNavigationTopViewModelCommand { get; private set; }
-        public IMvxAsyncCommand ShowNavigationLeftViewModelCommand { get; private set; }
+        public IMvxAsyncCommand ShowAudioPlayerViewModelCommand { get; private set; }
         public IMvxAsyncCommand ShowNavigationBottomViewModelCommand { get; private set; }
         public IMvxAsyncCommand ShowContentViewModelCommand { get; private set; }
 

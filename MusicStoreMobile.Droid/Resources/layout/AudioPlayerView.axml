@@ -1,7 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="30dp"
-    android:background="@color/gray">
+    android:layout_height="wrap_content"
+    android:background="@color/White">
+    <!--<View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/separator_line_size"
+        android:background="@color/Black" />-->
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+      <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/separator_line_size"
+        android:padding="0dp"
+        android:max="1000"
+        android:progressDrawable="@drawable/audio_player_seek_bar"
+        android:clickable="false"
+        android:thumb="@null"
+        local:MvxBind="Progress Position" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_margin="@dimen/element_margin_small"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/audio_player_skip_previous"
+            android:padding="@dimen/element_margin_tinier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            local:MvxBind="Click SkipPreviousCommand;">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_skip_previous"
+                android:tint="@color/Black" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/audio_player_title"
+            android:padding="@dimen/element_margin_tinier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/audio_player_skip_previous"
+            android:layout_toLeftOf="@+id/audio_player_play_pause"
+            android:layout_centerVertical="true">
+          <TextView
+                android:id="@+id/audio_player_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sample_text"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/Black"
+                android:textSize="@dimen/text_medium"
+                local:MvxBind="Text PlayingText;"/>
+          <!--TODO: fix marquee
+          <SelectedTextView
+                class="MusicStoreMobile.Droid.Controls.SelectedTextView"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:maxLines="1"
+                android:scrollHorizontally="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:freezesText="true"
+          -->
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/audio_player_play_pause"
+            android:padding="@dimen/element_margin_tinier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/element_margin_medium"
+            android:layout_toLeftOf="@+id/audio_player_skip_next"
+            local:MvxBind="Click PlayPauseCommand;">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_play_arrow"
+                android:tint="@color/Black" 
+                local:MvxBind="Visibility InvertedVisibility(MediaPlayerStatus(Status));"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_pause"
+                android:tint="@color/Black" 
+                local:MvxBind="Visibility Visibility(MediaPlayerStatus(Status));"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/audio_player_skip_next"
+            android:padding="@dimen/element_margin_tinier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            local:MvxBind="Click SkipNextCommand;">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_skip_next"
+                android:tint="@color/Black" />
+        </RelativeLayout>
+    </RelativeLayout>
 </LinearLayout>

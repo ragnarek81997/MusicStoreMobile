@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/separator_line_size"
+      android:background="@color/Black" />
+    <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
+      android:id="@+id/bottom_navigation_view"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/White"
+      local:itemIconTint="@color/Black"
+      local:itemTextColor="@color/Black"
+      local:menu="@menu/bottom_navigation_menu" />
+</LinearLayout>

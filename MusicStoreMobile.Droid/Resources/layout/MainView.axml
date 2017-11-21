@@ -6,13 +6,13 @@
     android:fitsSystemWindows="false"
     android:orientation="vertical">
     <LinearLayout
-        android:id="@+id/navigation_top"
+        android:id="@+id/top_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_alignParentTop="true">
         <FrameLayout
-            android:id="@+id/navigation_top_frame"
+            android:id="@+id/top_navigation_frame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -29,7 +29,7 @@
             android:layout_height="match_parent" />
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/navigation_bottom"
+        android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <FrameLayout
-            android:id="@+id/navigation_bottom_frame"
+            android:id="@+id/bottom_navigation_frame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
