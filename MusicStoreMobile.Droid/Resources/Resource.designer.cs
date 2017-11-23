@@ -10602,7 +10602,7 @@ namespace MusicStoreMobile.Droid
 			public const int Empty = 2131099648;
 			
 			// aapt resource value: 0x7f060001
-			public const int PreferenceView = 2131099649;
+			public const int PreferencesView = 2131099649;
 			
 			static Xml()
 			{

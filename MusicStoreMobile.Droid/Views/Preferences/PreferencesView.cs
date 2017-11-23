@@ -23,7 +23,7 @@ namespace MusicStoreMobile.Droid.Views.Preferences
     [Register(nameof(PreferencesView))]
     public class PreferencesView : BasePreferenceFragment<PreferencesViewModel>
     {
-        protected override int PreferenceId => Resource.Xml.PreferenceView;
+        protected override int PreferenceId => Resource.Xml.PreferencesView;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
