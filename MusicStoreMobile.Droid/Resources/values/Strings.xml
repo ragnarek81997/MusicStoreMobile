@@ -4,4 +4,18 @@
   <string name="home">Home</string>
   <string name="search">Search</string>
   <string name="library">Library</string>
+  <string name="add_album_title">Add album</string>
+  <string name="add_album_summary">Add new album</string>
+  
+  <string name="add_artist_title">Add artist</string>
+  <string name="add_artist_summary">Add new album</string>
+  
+  <string name="add_genre_title">Add genre</string>
+  <string name="add_genre_summary">Add new genre</string>
+  
+  <string name="add_playlist_title">Add playlist</string>
+  <string name="add_playlist_summary">Add new playlist</string>
+  
+  <string name="add_song_title">Add song</string>
+  <string name="add_song_summary">Add new song</string>
 </resources>

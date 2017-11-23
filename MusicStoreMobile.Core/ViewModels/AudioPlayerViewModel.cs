@@ -1,4 +1,5 @@
-﻿using MusicStoreMobile.Core.Services.Implementations;
+﻿using MusicStoreMobile.Core.Helpers.Interfaces;
+using MusicStoreMobile.Core.Services.Implementations;
 using MusicStoreMobile.Core.ViewModelResults;
 using MvvmCross.Core.ViewModels;
 using Plugin.MediaManager;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace MusicStoreMobile.Core.ViewModels
 {
-    public class AudioPlayerViewModel : BaseViewModelResult<DestructionResult>
+    public class AudioPlayerViewModel : BaseViewModel
     {
         public AudioPlayerViewModel()
         {
@@ -51,6 +52,11 @@ namespace MusicStoreMobile.Core.ViewModels
         public override void Start()
         {
             base.Start();
+        }
+
+        public override void ViewCreated()
+        {
+            base.ViewCreated();
         }
 
         public override Task Initialize()

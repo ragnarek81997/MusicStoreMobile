@@ -4,7 +4,7 @@
         AppTheme from BOTH res/values/styles.xml on API 21+ devices.
     -->
     <style name="AppTheme" parent="AppTheme.Base">
-
+      <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
         <!--<item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
 

@@ -21,6 +21,10 @@ using MvvmCross.Plugins.Validation.Droid;
 using Android.App;
 using Plugin.MediaManager;
 using MvvmCross.Platform.Logging;
+using MvvmCross.Droid.Support.V7.Preference;
+using MvvmCross.Droid.Views.Attributes;
+using System;
+using MusicStoreMobile.Core.Helpers.Interfaces;
 
 namespace MusicStoreMobile.Droid
 {
@@ -59,6 +63,8 @@ namespace MusicStoreMobile.Droid
             MvxAppCompatSetupHelper.FillTargetFactories(registry);
             base.FillTargetFactories(registry);
 
+            MvxPreferenceSetupHelper.FillTargetFactories(registry);
+
             registry.RegisterFactory(new MvxCustomBindingFactory<SwipeRefreshLayout>("IsRefreshing", (swipeRefreshLayout) => new SwipeRefreshLayoutIsRefreshingTargetBinding(swipeRefreshLayout)));
             registry.RegisterCustomBindingFactory<Android.Widget.EditText>("LineColor", (view) => new ValidationEditTextViewTargetBinding(view));
         }
@@ -68,13 +74,35 @@ namespace MusicStoreMobile.Droid
         /// </summary>
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
-            return new MvxAppCompatViewPresenter(AndroidViewAssemblies);
+            return new CustomMvxAppCompatViewPresenter(AndroidViewAssemblies, Mvx.Resolve<INavigationViewModelManager>());
         }
 
         //TODO: тимчаслве рішення для MVVMCROSS 5.4
         protected override MvxLogProviderType GetDefaultLogProviderType()
         {
             return MvxLogProviderType.None;
+        }
+        private class CustomMvxAppCompatViewPresenter : MvxAppCompatViewPresenter
+        {
+            private readonly INavigationViewModelManager _navigationViewModelManager;
+
+            public CustomMvxAppCompatViewPresenter(IEnumerable<Assembly> androidViewAssemblies, INavigationViewModelManager navigationViewModelManager) : base(androidViewAssemblies)
+            {
+                _navigationViewModelManager = navigationViewModelManager;
+            }
+
+            public override void Close(IMvxViewModel viewModel)
+            {
+                base.Close(viewModel);
+                _navigationViewModelManager.OnClose(viewModel);
+            }
+
+            public override void Show(MvxViewModelRequest request)
+            {
+                if (request is MvxViewModelInstanceRequest instanceRequest && instanceRequest.ViewModelInstance != null)
+                    _navigationViewModelManager.OnAdd(instanceRequest.ViewModelInstance);
+                base.Show(request);
+            }
         }
     }
 }

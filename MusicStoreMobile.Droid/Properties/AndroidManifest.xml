@@ -9,5 +9,5 @@
 	<uses-permission android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-	<application android:label="MusicStoreMobile" android:largeHeap="true" android:allowBackup="true"></application>
+	<application android:label="MusicStoreMobile" android:largeHeap="true" android:allowBackup="true" android:theme="@style/AppTheme"></application>
 </manifest>

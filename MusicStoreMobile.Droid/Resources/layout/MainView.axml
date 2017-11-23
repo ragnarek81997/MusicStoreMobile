@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,9 +8,7 @@
     <LinearLayout
         android:id="@+id/top_navigation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentTop="true">
+        android:layout_height="wrap_content">
         <FrameLayout
             android:id="@+id/top_navigation_frame"
             android:layout_width="match_parent"
@@ -19,10 +17,8 @@
     <LinearLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_below="@+id/navigation_top"
-        android:layout_above="@+id/navigation_bottom">
+        android:layout_weight="1"
+        android:layout_height="0dp">
         <FrameLayout
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
@@ -32,8 +28,7 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true">
+        android:orientation="vertical">
         <FrameLayout
             android:id="@+id/audio_player_frame"
             android:layout_width="match_parent"
@@ -43,4 +38,4 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>

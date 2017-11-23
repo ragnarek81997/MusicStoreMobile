@@ -35,7 +35,7 @@
     <Compile Include="Converters\InvertedValueConverter.cs" />
     <Compile Include="Enums\BlobCacheType.cs" />
     <Compile Include="Helpers\Implementations\DictionaryBlobCache.cs" />
-    <Compile Include="Helpers\Implementations\NavigationFragmentManager.cs" />
+    <Compile Include="Helpers\Implementations\NavigationViewModelManager.cs" />
     <Compile Include="Helpers\Implementations\ValidationHelper.cs" />
     <Compile Include="Helpers\Interfaces\IDictionaryBlobCache.cs" />
     <Compile Include="Helpers\Interfaces\INavigationFragmentManager.cs" />
@@ -89,6 +89,7 @@
     <Compile Include="Services\Interfaces\ILocationService.cs" />
     <Compile Include="Services\Interfaces\ITraceService.cs" />
     <Compile Include="ViewModels\Navigation\BottomNavigationViewModel.cs" />
+    <Compile Include="ViewModels\Preferences\PreferencesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

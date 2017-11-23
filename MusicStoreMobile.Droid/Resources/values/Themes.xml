@@ -12,6 +12,7 @@
   <style name="AppTheme" parent="AppTheme.Base">
     <item name="android:windowActionBarOverlay">true</item>
     <item name="android:windowContentOverlay">@null</item>
+    <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
   </style>
   
   <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">

@@ -38,8 +38,6 @@ namespace MusicStoreMobile.Droid.Views
             if (bundle == null)
             {
                 ViewModel.ShowContentViewModelCommand.Execute(null);
-                ViewModel.ShowNavigationTopViewModelCommand.Execute(null);
-                ViewModel.ShowNavigationBottomViewModelCommand.Execute(null);
             }
         }
 

@@ -9,11 +9,10 @@ using System.Threading.Tasks;
 
 namespace MusicStoreMobile.Core.Helpers.Interfaces
 {
-    public interface INavigationFragmentManager
+    public interface INavigationViewModelManager
     {
-        Task<TResult> Navigate<TViewModel, TParameter, TResult>(TParameter param, IMvxBundle presentationBundle = null) where TViewModel : BaseViewModel<TParameter, TResult>;
-        Task<TResult> Navigate<TViewModel, TResult>(IMvxBundle presentationBundle = null) where TViewModel : BaseViewModelResult<TResult>;
-
-        Task Close<TViewModel>() where TViewModel : BaseViewModel;
+        Task<int> Close<TViewModel>(bool firstOrAll = false) where TViewModel : IMvxViewModel;
+        Task OnAdd<TViewModel>(TViewModel viewModel) where TViewModel : IMvxViewModel;
+        Task OnClose<TViewModel>(TViewModel viewModel) where TViewModel : IMvxViewModel;
     }
 }

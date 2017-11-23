@@ -14,26 +14,29 @@ using System.Globalization;
 using System.Collections.Generic;
 using MusicStoreMobile.Core.Helpers.Implementations;
 using MvvmCross.Platform;
+using MusicStoreMobile.Core.ViewModels.Navigation;
+using MusicStoreMobile.Core.ViewModelResults;
+using System.Threading;
 
 namespace MusicStoreMobile.Core.ViewModels.Auth
 {
     public class LoginViewModel : BaseViewModel
     {
         private readonly IMvxNavigationService _navigationService;
+        private readonly INavigationViewModelManager _navigationViewModelManager;
+        
         private readonly IAuthService _authService;
         private readonly IUserDialogs _userDialogs;
 
         private readonly IValidationHelper _validationHelper;
-        private readonly INavigationFragmentManager _navigationFragmentManager;
         
-
-        public LoginViewModel(IMvxNavigationService navigationService, IAuthService authService, IUserDialogs userDialogs, IValidator validator, INavigationFragmentManager navigationFragmentManager)
+        public LoginViewModel(IMvxNavigationService navigationService, IAuthService authService, IUserDialogs userDialogs, IValidator validator, INavigationViewModelManager navigationViewModelManager)
         {
             _navigationService = navigationService;
+            _navigationViewModelManager = navigationViewModelManager;
+
             _authService = authService;
             _userDialogs = userDialogs;
-
-            _navigationFragmentManager = navigationFragmentManager;
 
             _validationHelper = new ValidationHelper(validator, this, Errors.Value, (propertyName) => { FocusName.Value = propertyName; });
 
@@ -46,14 +49,18 @@ namespace MusicStoreMobile.Core.ViewModels.Auth
 
             LogInCommand = new MvxCommand(() => 
             {
-                if (!IsTaskExecutedValueConverter.Convert(LogInTask.Value))
-                {
-                    LogInTask.Value = NotifyTaskCompletion.Create(AttemptLogInAsync);
-                }
-                _navigationFragmentManager.Close<AudioPlayerViewModel>();
+                _navigationService.Navigate<BottomNavigationViewModel>();
+                //if (!IsTaskExecutedValueConverter.Convert(LogInTask.Value))
+                //{
+                //    LogInTask.Value = NotifyTaskCompletion.Create(AttemptLogInAsync);
+                //}
             });
 
-			ShowRegistrationViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<RegistrationViewModel>());
+			ShowRegistrationViewModelCommand = new MvxAsyncCommand(async () => 
+            {
+                //await _navigationService.Navigate<RegistrationViewModel>();
+                await _navigationViewModelManager.Close<BottomNavigationViewModel>(false);
+            });
         }
 
         // MvvmCross Lifecycle

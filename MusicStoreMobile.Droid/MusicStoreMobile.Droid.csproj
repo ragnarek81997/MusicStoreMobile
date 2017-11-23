@@ -111,6 +111,9 @@
     <Reference Include="MvvmCross.Droid.Support.V7.AppCompat, Version=5.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmCross.Droid.Support.V7.AppCompat.5.4.0\lib\MonoAndroid70\MvvmCross.Droid.Support.V7.AppCompat.dll</HintPath>
     </Reference>
+    <Reference Include="MvvmCross.Droid.Support.V7.Preference, Version=5.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmCross.Droid.Support.V7.Preference.5.4.0\lib\MonoAndroid70\MvvmCross.Droid.Support.V7.Preference.dll</HintPath>
+    </Reference>
     <Reference Include="MvvmCross.Droid.Support.V7.RecyclerView, Version=5.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmCross.Droid.Support.V7.RecyclerView.5.4.0\lib\MonoAndroid70\MvvmCross.Droid.Support.V7.RecyclerView.dll</HintPath>
     </Reference>
@@ -253,6 +256,9 @@
     <Reference Include="Xamarin.Android.Support.v7.AppCompat, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Android.Support.v7.AppCompat.26.1.0.1\lib\MonoAndroid80\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.Preference, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.Preference.26.1.0.1\lib\MonoAndroid80\Xamarin.Android.Support.v7.Preference.dll</HintPath>
+    </Reference>
     <Reference Include="Xamarin.Android.Support.v7.RecyclerView, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Android.Support.v7.RecyclerView.26.1.0.1\lib\MonoAndroid80\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
     </Reference>
@@ -285,13 +291,15 @@
     <Compile Include="Views\AudioPlayerView.cs" />
     <Compile Include="Views\Auth\RegistrationView.cs" />
     <Compile Include="Views\Auth\LoginView.cs" />
-    <Compile Include="Views\MainView.cs" />
     <Compile Include="Views\BaseFragment.cs" />
+    <Compile Include="Views\MainView.cs" />
+    <Compile Include="Views\BasePreferenceFragment.cs" />
     <Compile Include="Extensions\MvxRecyclerViewExtensions.cs" />
     <Compile Include="Controls\RecyclerViewOnScrollListener.cs" />
     <Compile Include="MvxBindings\SwipeRefreshLayoutIsRefreshingTargetBinding.cs" />
     <Compile Include="Helpers\KeyboardUtils.cs" />
     <Compile Include="Views\Navigation\BottomNavigationView.cs" />
+    <Compile Include="Views\Preferences\PreferencesView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -519,6 +527,9 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\audio_player_seek_bar.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\xml\PreferenceView.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.targets" Condition="Exists('..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.targets')" />
   <ProjectExtensions>
@@ -562,6 +573,7 @@
     <Error Condition="!Exists('..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Animated.Vector.Drawable.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Animated.Vector.Drawable.targets'))" />
     <Error Condition="!Exists('..\packages\Xamarin.Android.Support.v7.AppCompat.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.v7.AppCompat.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.v7.AppCompat.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.v7.AppCompat.targets'))" />
     <Error Condition="!Exists('..\packages\Xamarin.Android.Support.Design.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Design.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.Design.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Design.targets'))" />
+    <Error Condition="!Exists('..\packages\Xamarin.Android.Support.v7.Preference.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.v7.Preference.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.v7.Preference.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.v7.Preference.targets'))" />
   </Target>
   <Import Project="..\packages\Xamarin.Android.Support.Annotations.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Annotations.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Annotations.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Annotations.targets')" />
   <Import Project="..\packages\Xamarin.Android.Arch.Core.Common.1.0.0\build\MonoAndroid80\Xamarin.Android.Arch.Core.Common.targets" Condition="Exists('..\packages\Xamarin.Android.Arch.Core.Common.1.0.0\build\MonoAndroid80\Xamarin.Android.Arch.Core.Common.targets')" />
@@ -580,4 +592,5 @@
   <Import Project="..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Animated.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Animated.Vector.Drawable.targets')" />
   <Import Project="..\packages\Xamarin.Android.Support.v7.AppCompat.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.v7.AppCompat.targets" Condition="Exists('..\packages\Xamarin.Android.Support.v7.AppCompat.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.v7.AppCompat.targets')" />
   <Import Project="..\packages\Xamarin.Android.Support.Design.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Design.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Design.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.Design.targets')" />
+  <Import Project="..\packages\Xamarin.Android.Support.v7.Preference.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.v7.Preference.targets" Condition="Exists('..\packages\Xamarin.Android.Support.v7.Preference.26.1.0.1\build\MonoAndroid80\Xamarin.Android.Support.v7.Preference.targets')" />
 </Project>

@@ -12,7 +12,7 @@ namespace MusicStoreMobile.Core
         public static class DbTokens
         {
             public const string AuthorizedUser = "authorizedUser";
-            public const string NavigationFragmentManager = "navigationFragmentManager";
+            public const string NavigationViewModelManager = "navigationViewModelManager";
         }
     }
 }

@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using MusicStoreMobile.Core.Helpers.Interfaces;
 using MusicStoreMobile.Core.Converters;
 using MusicStoreMobile.Core.Helpers.Implementations;
+using MusicStoreMobile.Core.ViewModelResults;
 
 namespace MusicStoreMobile.Core.ViewModels.Auth
 {
