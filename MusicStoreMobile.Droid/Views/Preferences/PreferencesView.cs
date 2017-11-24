@@ -29,12 +29,21 @@ namespace MusicStoreMobile.Droid.Views.Preferences
         {
             var view = base.OnCreateView(inflater, container, savedInstanceState);
 
-            var serverPreference = (EditTextPreference)this.FindPreference("pref_server");
+            var addAlbumPreference = (Preference)this.FindPreference("add_album_pref");
+            var addArtistPreference = (Preference)this.FindPreference("add_artist_pref");
+            var addGenrePreference = (Preference)this.FindPreference("add_genre_pref");
+            var addPlaylistPreference = (Preference)this.FindPreference("add_playlist_pref");
+            var addSongPreference = (Preference)this.FindPreference("add_song_pref");
+            var logOutPreference = (Preference)this.FindPreference("logout_pref");
+            
 
             var bindingSet = this.CreateBindingSet<PreferencesView, PreferencesViewModel>();
-            //bindingSet.Bind(serverPreference)
-            //    .For(v => v.Text)
-            //    .To(vm => vm.ServerAddress);
+            bindingSet.Bind(addAlbumPreference).For("Click").To(vm => vm.ShowAddAlbumViewModelCommand);
+            bindingSet.Bind(addArtistPreference).For("Click").To(vm => vm.ShowAddArtistViewModelCommand);
+            bindingSet.Bind(addGenrePreference).For("Click").To(vm => vm.ShowAddGenreViewModelCommand);
+            bindingSet.Bind(addPlaylistPreference).For("Click").To(vm => vm.ShowAddPlaylistViewModelCommand);
+            bindingSet.Bind(addSongPreference).For("Click").To(vm => vm.ShowAddSongViewModelCommand);
+            bindingSet.Bind(logOutPreference).For("Click").To(vm => vm.LogOutCommand);
             bindingSet.Apply();
 
             return view;

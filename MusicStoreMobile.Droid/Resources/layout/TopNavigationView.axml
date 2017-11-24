@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+  <android.support.v7.widget.Toolbar
+     android:id="@+id/top_navigation_view"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:background="@color/White"
+     android:theme="@style/top_navigation_view_theme"
+     android:gravity="center_vertical"
+     local:contentInsetStartWithNavigation="0dp">
+    <TextView
+      android:id="@+id/top_navigation_view_title"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:textSize="@dimen/text_very_huge"
+      android:textColor="@color/Black"
+      android:maxLines="1"
+      android:ellipsize="end" 
+      local:MvxBind="Text Title;"/>
+  </android.support.v7.widget.Toolbar>
+  <View
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/separator_line_size"
+    android:background="@color/Black" />
+  </LinearLayout>

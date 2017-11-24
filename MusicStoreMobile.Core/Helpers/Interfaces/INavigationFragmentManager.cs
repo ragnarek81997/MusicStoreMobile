@@ -1,4 +1,5 @@
-﻿using MusicStoreMobile.Core.ViewModels;
+﻿using MusicStoreMobile.Core.ViewModelResults;
+using MusicStoreMobile.Core.ViewModels;
 using MvvmCross.Core.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace MusicStoreMobile.Core.Helpers.Interfaces
 {
     public interface INavigationViewModelManager
     {
+        Task<ServiceResult<List<IMvxViewModel>>> Get<TViewModel>() where TViewModel : IMvxViewModel;
         Task<int> Close<TViewModel>(bool firstOrAll = false) where TViewModel : IMvxViewModel;
         Task OnAdd<TViewModel>(TViewModel viewModel) where TViewModel : IMvxViewModel;
         Task OnClose<TViewModel>(TViewModel viewModel) where TViewModel : IMvxViewModel;

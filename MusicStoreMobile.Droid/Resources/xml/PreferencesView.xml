@@ -20,4 +20,8 @@
     android:title="@string/add_song_title"
     android:summary="@string/add_song_summary"
   />
+  <Preference android:key="logout_pref"
+    android:title="@string/logout_title"
+    android:summary="@string/logout_summary"
+  />
 </PreferenceScreen>

@@ -42,5 +42,11 @@
 
   <style name="acr_dialog_theme" parent="Theme.AppCompat.Light.Dialog">
   </style>
+
+  <style name="top_navigation_view_theme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    <item name="colorControlNormal">@color/Black</item>
+    <item name="android:textColorPrimary">@color/Black</item>
+    <item name="android:icon">@android:color/transparent</item>
+  </style>
   
 </resources>

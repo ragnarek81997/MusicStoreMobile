@@ -22,7 +22,6 @@ namespace MusicStoreMobile.Core.ViewModels.Navigation
         // MvvmCross Lifecycle
         public override void Start()
         {
-            var a = this;
             base.Start();
         }
 

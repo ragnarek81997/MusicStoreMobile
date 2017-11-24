@@ -147,7 +147,7 @@ namespace MusicStoreMobile.Core.ViewModels.Auth
                 var serviceResult = await _authService.Register(user);
                 if (serviceResult.Success)
                 {
-                    await _navigationService.Navigate<LoginViewModel>();
+                    await _navigationService.Navigate<LoginViewModel, ApplicationUserModel>(new ApplicationUserModel() { Email = Email.Value, Password = Password.Value });
                 }
                 else
                 {

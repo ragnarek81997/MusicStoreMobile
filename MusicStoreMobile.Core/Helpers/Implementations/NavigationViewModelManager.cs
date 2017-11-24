@@ -1,5 +1,6 @@
 ﻿using MusicStoreMobile.Core.Helpers.Interfaces;
 using MusicStoreMobile.Core.Services.Interfaces;
+using MusicStoreMobile.Core.ViewModelResults;
 using MusicStoreMobile.Core.ViewModels;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
@@ -27,6 +28,11 @@ namespace MusicStoreMobile.Core.Helpers.Implementations
             return Constants.DbTokens.NavigationViewModelManager + (viewModel == null ? typeof(TViewModel).Name : viewModel.GetType().Name);
         }
 
+        public async Task<ServiceResult<List<IMvxViewModel>>> Get<TViewModel>() where TViewModel : IMvxViewModel
+        {
+            return await _dbService.GetObject<List<IMvxViewModel>>(GetDbTokenName<TViewModel>(null));
+        }
+
         public async Task<int> Close<TViewModel>(bool firstOrAll = false) where TViewModel : IMvxViewModel
         {
             var ctsResult = await _dbService.GetObject<List<IMvxViewModel>>(GetDbTokenName<TViewModel>(null));
@@ -34,14 +40,14 @@ namespace MusicStoreMobile.Core.Helpers.Implementations
 
             var closedCounter = 0;
 
-            foreach(var viewModel in viewModelsObject.ToList())
+            foreach (var viewModel in viewModelsObject.ToList())
             {
                 if (viewModel is null)
                     continue;
 
                 closedCounter += 1;
-               
-                    await _navigationService.Close(viewModel);
+
+                await _navigationService.Close(viewModel);
                 if (firstOrAll)
                     break;
             }

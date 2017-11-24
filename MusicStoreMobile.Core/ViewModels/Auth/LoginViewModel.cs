@@ -17,23 +17,29 @@ using MvvmCross.Platform;
 using MusicStoreMobile.Core.ViewModels.Navigation;
 using MusicStoreMobile.Core.ViewModelResults;
 using System.Threading;
+using MusicStoreMobile.Core.ViewModels.Preferences;
+using MusicStoreMobile.Core.Models;
 
 namespace MusicStoreMobile.Core.ViewModels.Auth
 {
-    public class LoginViewModel : BaseViewModel
+    public class LoginViewModel : BaseViewModel<ApplicationUserModel>
     {
         private readonly IMvxNavigationService _navigationService;
+
         private readonly INavigationViewModelManager _navigationViewModelManager;
-        
+        private readonly ITopNavigationViewModelService _topNavigationViewModelService;
+
         private readonly IAuthService _authService;
         private readonly IUserDialogs _userDialogs;
 
         private readonly IValidationHelper _validationHelper;
         
-        public LoginViewModel(IMvxNavigationService navigationService, IAuthService authService, IUserDialogs userDialogs, IValidator validator, INavigationViewModelManager navigationViewModelManager)
+        public LoginViewModel(IMvxNavigationService navigationService, IAuthService authService, IUserDialogs userDialogs, IValidator validator, INavigationViewModelManager navigationViewModelManager, ITopNavigationViewModelService topNavigationViewModelService)
         {
             _navigationService = navigationService;
+
             _navigationViewModelManager = navigationViewModelManager;
+            _topNavigationViewModelService = topNavigationViewModelService;
 
             _authService = authService;
             _userDialogs = userDialogs;
@@ -49,21 +55,30 @@ namespace MusicStoreMobile.Core.ViewModels.Auth
 
             LogInCommand = new MvxCommand(() => 
             {
-                _navigationService.Navigate<BottomNavigationViewModel>();
-                //if (!IsTaskExecutedValueConverter.Convert(LogInTask.Value))
-                //{
-                //    LogInTask.Value = NotifyTaskCompletion.Create(AttemptLogInAsync);
-                //}
+                if (!IsTaskExecutedValueConverter.Convert(LogInTask.Value))
+                {
+                    LogInTask.Value = NotifyTaskCompletion.Create(AttemptLogInAsync);
+                }
             });
 
 			ShowRegistrationViewModelCommand = new MvxAsyncCommand(async () => 
             {
-                //await _navigationService.Navigate<RegistrationViewModel>();
-                await _navigationViewModelManager.Close<BottomNavigationViewModel>(false);
+                await _navigationService.Navigate<RegistrationViewModel>();
             });
         }
 
         // MvvmCross Lifecycle
+        public override void Prepare(ApplicationUserModel parameter)
+        {
+            if (parameter != null)
+            {
+                Email.Value = parameter.Email;
+                Password.Value = parameter.Password;
+
+                LogInCommand?.Execute(null);
+            }
+        }
+
         public override void Start()
         {
             base.Start();
@@ -106,13 +121,22 @@ namespace MusicStoreMobile.Core.ViewModels.Auth
 
             if (_validationHelper.Validate())
             {
+                _userDialogs.ShowLoading("Login");
+
                 var serviceResult = await _authService.Login(Email.Value, Password.Value);
                 if (serviceResult.Success)
                 {
-                    await _navigationService.Navigate<MainViewModel>();
+                    await _navigationService.Navigate<PreferencesViewModel>();
+                    await _topNavigationViewModelService.Show(new TopNavigationViewModel.PrepareModel() { Title = "Preferences" });
+
+                    await _navigationService.Navigate<BottomNavigationViewModel>();
+
+                    _userDialogs.HideLoading();
                 }
                 else
                 {
+                    _userDialogs.HideLoading();
+
                     await _userDialogs.AlertAsync(new AlertConfig
                     {
                         Title = "Login failed",

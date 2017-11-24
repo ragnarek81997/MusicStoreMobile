@@ -25,6 +25,7 @@ using MvvmCross.Droid.Support.V7.Preference;
 using MvvmCross.Droid.Views.Attributes;
 using System;
 using MusicStoreMobile.Core.Helpers.Interfaces;
+using Android.Support.V7.Preferences;
 
 namespace MusicStoreMobile.Droid
 {
@@ -67,6 +68,9 @@ namespace MusicStoreMobile.Droid
 
             registry.RegisterFactory(new MvxCustomBindingFactory<SwipeRefreshLayout>("IsRefreshing", (swipeRefreshLayout) => new SwipeRefreshLayoutIsRefreshingTargetBinding(swipeRefreshLayout)));
             registry.RegisterCustomBindingFactory<Android.Widget.EditText>("LineColor", (view) => new ValidationEditTextViewTargetBinding(view));
+
+            registry.RegisterCustomBindingFactory<Preference>("Click", (pref) => new MvxPreferenceClickTargetBinding(pref));
+            
         }
 
         /// <summary>
@@ -100,7 +104,9 @@ namespace MusicStoreMobile.Droid
             public override void Show(MvxViewModelRequest request)
             {
                 if (request is MvxViewModelInstanceRequest instanceRequest && instanceRequest.ViewModelInstance != null)
+                {
                     _navigationViewModelManager.OnAdd(instanceRequest.ViewModelInstance);
+                }
                 base.Show(request);
             }
         }

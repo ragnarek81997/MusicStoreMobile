@@ -8,6 +8,7 @@ using MusicStoreMobile.Core.ViewModels.Preferences;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,11 +18,16 @@ namespace MusicStoreMobile.Core.ViewModels
     {
         private readonly IMvxNavigationService _navigationService;
         private readonly IAuthService _authService;
+        private readonly INavigationViewModelManager _navigationViewModelManager;
+        private readonly ITopNavigationViewModelService _topNavigationViewModelService;
+        
 
-        public MainViewModel(IMvxNavigationService navigationService, IAuthService authService)
+        public MainViewModel(IMvxNavigationService navigationService, IAuthService authService, INavigationViewModelManager navigationViewModelManager, ITopNavigationViewModelService topNavigationViewModelService)
         {
             _navigationService = navigationService;
             _authService = authService;
+            _navigationViewModelManager = navigationViewModelManager;
+            _topNavigationViewModelService = topNavigationViewModelService;
 
             ShowNavigationTopViewModelCommand = new MvxAsyncCommand(async () => await Task.Run(()=>{ }));
             ShowAudioPlayerViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<AudioPlayerViewModel>());
@@ -29,17 +35,21 @@ namespace MusicStoreMobile.Core.ViewModels
             ShowContentViewModelCommand = new MvxAsyncCommand(async () => 
             {
                 var serviceResult = await _authService.Authorize();
-                await _navigationService.Navigate<LoginViewModel>();
-                /*if (!serviceResult.Success)
+                if (!serviceResult.Success)
                 {
+                    await _navigationViewModelManager.Close<AudioPlayerViewModel>();
+                    await _navigationViewModelManager.Close<BottomNavigationViewModel>();
+
+                    await _topNavigationViewModelService.Close();
                     await _navigationService.Navigate<LoginViewModel>();
                 }
                 else
                 {
                     await _navigationService.Navigate<PreferencesViewModel>();
-                }*/
-                //ShowNavigationBottomViewModelCommand.Execute(null);
-                //ShowAudioPlayerViewModelCommand.Execute(null);
+                    await _topNavigationViewModelService.Show(new TopNavigationViewModel.PrepareModel() { Title = "Preferences" });
+                    
+                    await _navigationService.Navigate<BottomNavigationViewModel>();
+                }
             });
         }
 
