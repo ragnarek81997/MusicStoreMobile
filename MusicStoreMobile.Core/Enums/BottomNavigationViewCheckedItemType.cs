@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace MusicStoreMobile.Core.Enums
 {
-    public enum TopNavigationViewIconType
+    public enum BottomNavigationViewCheckedItemType
     {
         None,
-        Preferences,
-        Back,
-        Done,
-        Search
+        Home,
+        Search,
+        Library
     }
 }

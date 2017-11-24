@@ -53,6 +53,9 @@ namespace MusicStoreMobile.Droid.Helpers
                     case TopNavigationViewIconType.Done:
                         MenuIcon = AppCompatExtensions.GetDrawable(Resource.Drawable.ic_done).Mutate();
                         break;
+                    case TopNavigationViewIconType.Search:
+                        MenuIcon = AppCompatExtensions.GetDrawable(Resource.Drawable.ic_search).Mutate();
+                        break;
                     default:
                         MenuIcon = new ColorDrawable(Color.Transparent).Mutate();
                         break;

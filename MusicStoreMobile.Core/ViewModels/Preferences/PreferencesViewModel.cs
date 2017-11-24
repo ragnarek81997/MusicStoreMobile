@@ -18,21 +18,22 @@ namespace MusicStoreMobile.Core.ViewModels.Preferences
 {
     public class PreferencesViewModel : BaseViewModel
     {
-        private readonly IMvxNavigationService _navigationService;
         private readonly IAuthService _authService;
         private readonly IUserDialogs _userDialogs;
 
-        private readonly INavigationViewModelManager _navigationViewModelManager;
+        private readonly IMvxNavigationService _navigationService;
         private readonly ITopNavigationViewModelService _topNavigationViewModelService;
+        private readonly IBottomNavigationViewModelService _bottomNavigationViewModelService;
 
-        public PreferencesViewModel(IMvxNavigationService navigationService, IAuthService authService, IUserDialogs userDialogs, INavigationViewModelManager navigationViewModelManager, ITopNavigationViewModelService topNavigationViewModelService)
+        public PreferencesViewModel(IMvxNavigationService navigationService, IAuthService authService, IUserDialogs userDialogs, ITopNavigationViewModelService topNavigationViewModelService, IBottomNavigationViewModelService bottomNavigationViewModelService)
         {
             _navigationService = navigationService;
+            _topNavigationViewModelService = topNavigationViewModelService;
+            _bottomNavigationViewModelService = bottomNavigationViewModelService;
+
             _authService = authService;
             _userDialogs = userDialogs;
 
-            _navigationViewModelManager = navigationViewModelManager;
-            _topNavigationViewModelService = topNavigationViewModelService;
 
             ShowAddAlbumViewModelCommand = new MvxCommand(() => 
             {
@@ -70,6 +71,19 @@ namespace MusicStoreMobile.Core.ViewModels.Preferences
             base.Start();
         }
 
+        public override void ViewAppeared()
+        {
+            base.ViewAppeared();
+            _topNavigationViewModelService.Show(new TopNavigationViewModel.PrepareModel()
+            {
+                Title = "Preferences",
+                HomeIconType = Enums.TopNavigationViewIconType.Back,
+                HomeIconCommand = new MvxCommand(async () => await _navigationService.Close(this))
+            }
+            );
+            _bottomNavigationViewModelService.CheckItem(Enums.BottomNavigationViewCheckedItemType.None);
+        }
+
         // MVVM Properties
 
         public readonly INC<INotifyTaskCompletion> LogOutTask = new NC<INotifyTaskCompletion>();
@@ -90,10 +104,8 @@ namespace MusicStoreMobile.Core.ViewModels.Preferences
             _userDialogs.ShowLoading("Logout");
             var serviceResult = await _authService.Logout();
 
-            await _navigationViewModelManager.Close<AudioPlayerViewModel>();
-            await _navigationViewModelManager.Close<BottomNavigationViewModel>();
-
             await _topNavigationViewModelService.Close();
+            await _bottomNavigationViewModelService.Close();
             await _navigationService.Navigate<LoginViewModel>();
 
             _userDialogs.HideLoading();

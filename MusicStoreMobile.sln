@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.MediaManager.Abstrac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.MediaManager.Android", "MediaManager.Android\Plugin.MediaManager.Android.csproj", "{56A56F17-7DE1-4CA1-9617-BF32E971AC84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Binding_BottomNavigationViewEx-124", "MusicStoreMobile.Droid\AndroidBindings\Binding_BottomNavigationViewEx-124\Binding_BottomNavigationViewEx-124.csproj", "{66B99ACB-C9D6-4C7C-9452-312B9D391564}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,18 +89,6 @@ Global
 		{56A56F17-7DE1-4CA1-9617-BF32E971AC84}.Release|iPhone.Build.0 = Release|Any CPU
 		{56A56F17-7DE1-4CA1-9617-BF32E971AC84}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{56A56F17-7DE1-4CA1-9617-BF32E971AC84}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{66B99ACB-C9D6-4C7C-9452-312B9D391564}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{66B99ACB-C9D6-4C7C-9452-312B9D391564}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{66B99ACB-C9D6-4C7C-9452-312B9D391564}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{66B99ACB-C9D6-4C7C-9452-312B9D391564}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{66B99ACB-C9D6-4C7C-9452-312B9D391564}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{66B99ACB-C9D6-4C7C-9452-312B9D391564}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{66B99ACB-C9D6-4C7C-9452-312B9D391564}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{66B99ACB-C9D6-4C7C-9452-312B9D391564}.Release|Any CPU.Build.0 = Release|Any CPU
-		{66B99ACB-C9D6-4C7C-9452-312B9D391564}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{66B99ACB-C9D6-4C7C-9452-312B9D391564}.Release|iPhone.Build.0 = Release|Any CPU
-		{66B99ACB-C9D6-4C7C-9452-312B9D391564}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{66B99ACB-C9D6-4C7C-9452-312B9D391564}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

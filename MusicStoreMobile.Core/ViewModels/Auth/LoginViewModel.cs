@@ -19,27 +19,26 @@ using MusicStoreMobile.Core.ViewModelResults;
 using System.Threading;
 using MusicStoreMobile.Core.ViewModels.Preferences;
 using MusicStoreMobile.Core.Models;
+using MusicStoreMobile.Core.ViewModels.Main;
 
 namespace MusicStoreMobile.Core.ViewModels.Auth
 {
     public class LoginViewModel : BaseViewModel<ApplicationUserModel>
     {
         private readonly IMvxNavigationService _navigationService;
-
-        private readonly INavigationViewModelManager _navigationViewModelManager;
         private readonly ITopNavigationViewModelService _topNavigationViewModelService;
+        private readonly IBottomNavigationViewModelService _bottomNavigationViewModelService;
 
         private readonly IAuthService _authService;
         private readonly IUserDialogs _userDialogs;
 
         private readonly IValidationHelper _validationHelper;
         
-        public LoginViewModel(IMvxNavigationService navigationService, IAuthService authService, IUserDialogs userDialogs, IValidator validator, INavigationViewModelManager navigationViewModelManager, ITopNavigationViewModelService topNavigationViewModelService)
+        public LoginViewModel(IMvxNavigationService navigationService, IAuthService authService, IUserDialogs userDialogs, IValidator validator, IBottomNavigationViewModelService bottomNavigationViewModelService, ITopNavigationViewModelService topNavigationViewModelService)
         {
             _navigationService = navigationService;
-
-            _navigationViewModelManager = navigationViewModelManager;
             _topNavigationViewModelService = topNavigationViewModelService;
+            _bottomNavigationViewModelService = bottomNavigationViewModelService;
 
             _authService = authService;
             _userDialogs = userDialogs;
@@ -126,11 +125,8 @@ namespace MusicStoreMobile.Core.ViewModels.Auth
                 var serviceResult = await _authService.Login(Email.Value, Password.Value);
                 if (serviceResult.Success)
                 {
-                    await _navigationService.Navigate<PreferencesViewModel>();
-                    await _topNavigationViewModelService.Show(new TopNavigationViewModel.PrepareModel() { Title = "Preferences" });
-
-                    await _navigationService.Navigate<BottomNavigationViewModel>();
-
+                    await _navigationService.Navigate<HomeViewModel>();
+                    await _bottomNavigationViewModelService.Show(new BottomNavigationViewModel.PrepareModel() { CheckedItem = Enums.BottomNavigationViewCheckedItemType.Home });
                     _userDialogs.HideLoading();
                 }
                 else

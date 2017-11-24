@@ -14,4 +14,7 @@
       android:id="@+id/i_library"
       android:icon="@drawable/ic_apps"
       android:title="@string/library" />
+
+  <item
+    android:id="@+id/i_unchecked" />
 </menu>

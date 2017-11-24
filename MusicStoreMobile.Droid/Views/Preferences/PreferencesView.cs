@@ -19,7 +19,7 @@ using MvvmCross.Binding.BindingContext;
 
 namespace MusicStoreMobile.Droid.Views.Preferences
 {
-    [MvxFragmentPresentation(typeof(MainViewModel), Resource.Id.content_frame, false)]
+    [MvxFragmentPresentation(typeof(MainViewModel), Resource.Id.content_frame, true)]
     [Register(nameof(PreferencesView))]
     public class PreferencesView : BasePreferenceFragment<PreferencesViewModel>
     {

@@ -156,6 +156,9 @@
     <Reference Include="MvvmCross.Plugins.Visibility.Droid, Version=5.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmCross.Plugin.Visibility.5.4.0\lib\MonoAndroid\MvvmCross.Plugins.Visibility.Droid.dll</HintPath>
     </Reference>
+    <Reference Include="Naxam.Ittianyu.BottomNavExtension, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Naxam.Ittianyu.BottomNavExtension.1.2.2\lib\MonoAndroid10\Naxam.Ittianyu.BottomNavExtension.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\netstandard1.3\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -296,6 +299,9 @@
     <Compile Include="Controls\RecyclerViewOnScrollListener.cs" />
     <Compile Include="MvxBindings\SwipeRefreshLayoutIsRefreshingTargetBinding.cs" />
     <Compile Include="Helpers\KeyboardUtils.cs" />
+    <Compile Include="Views\Main\LibraryView.cs" />
+    <Compile Include="Views\Main\SearchView.cs" />
+    <Compile Include="Views\Main\HomeView.cs" />
     <Compile Include="Views\Navigation\TopNavigationView.cs" />
     <Compile Include="Views\Navigation\BottomNavigationView.cs" />
     <Compile Include="Views\Preferences\PreferencesView.cs" />
@@ -320,6 +326,15 @@
     <AndroidResource Include="Resources\layout\TopNavigationView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\HomeView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SearchView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\LibraryView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\MainView.axml">
@@ -341,10 +356,6 @@
     <ProjectReference Include="..\MusicStoreMobile.Core\MusicStoreMobile.Core.csproj">
       <Project>{dece7897-83cc-431c-b87e-d61901d0a629}</Project>
       <Name>MusicStoreMobile.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="AndroidBindings\Binding_BottomNavigationViewEx-124\Binding_BottomNavigationViewEx-124.csproj">
-      <Project>{66B99ACB-C9D6-4C7C-9452-312B9D391564}</Project>
-      <Name>Binding_BottomNavigationViewEx-124</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

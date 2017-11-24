@@ -222,6 +222,7 @@ namespace MusicStoreMobile.Droid.Views.Navigation
         public override void OnDestroy()
         {
             _topNavigationView?.Dispose();
+            _actionMenuItem?.Dispose();
             base.OnDestroy();
         }
     }
