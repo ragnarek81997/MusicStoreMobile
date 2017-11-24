@@ -103,6 +103,10 @@ namespace MusicStoreMobile.Core.Services.Implementations
 
         public async Task<ServiceResult> SetActionIcon(TopNavigationViewIconType iconType, IMvxCommand iconCommand)
         {
+            return await SetActionIcon(iconType, new MvxCommand(() => iconCommand?.Execute(null)));
+        }
+        public async Task<ServiceResult> SetActionIcon(TopNavigationViewIconType iconType, IMvxCommand<string> iconCommand)
+        {
             var serviceResult = new ServiceResult();
 
             var viewModelResult = await Get();

@@ -46,7 +46,12 @@ namespace MusicStoreMobile.Core.ViewModels
                 else
                 {
                     await _navigationService.Navigate<PreferencesViewModel>();
-                    await _topNavigationViewModelService.Show(new TopNavigationViewModel.PrepareModel() { Title = "Preferences" });
+                    await _topNavigationViewModelService.Show(new TopNavigationViewModel.PrepareModel() { Title = "Preferences", IsSearch = true, HomeIconType = Enums.TopNavigationViewIconType.Back, ActionIconType = Enums.TopNavigationViewIconType.Preferences, ActionIconCommand = new MvxCommand<string>(
+                        (query)=> 
+                        {
+
+                        })
+                    });
                     
                     await _navigationService.Navigate<BottomNavigationViewModel>();
                 }

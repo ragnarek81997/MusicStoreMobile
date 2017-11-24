@@ -7677,71 +7677,74 @@ namespace MusicStoreMobile.Droid
 			// aapt resource value: 0x7f070009
 			public const int preference_seekbar_value_width = 2131165193;
 			
+			// aapt resource value: 0x7f0700b0
+			public const int search_view_padding = 2131165360;
+			
 			// aapt resource value: 0x7f0700af
 			public const int separator_line_size = 2131165359;
 			
+			// aapt resource value: 0x7f0700b6
+			public const int text_huge = 2131165366;
+			
 			// aapt resource value: 0x7f0700b5
-			public const int text_huge = 2131165365;
+			public const int text_large = 2131165365;
 			
 			// aapt resource value: 0x7f0700b4
-			public const int text_large = 2131165364;
-			
-			// aapt resource value: 0x7f0700b3
-			public const int text_medium = 2131165363;
-			
-			// aapt resource value: 0x7f0700b8
-			public const int text_size_12 = 2131165368;
+			public const int text_medium = 2131165364;
 			
 			// aapt resource value: 0x7f0700b9
-			public const int text_size_13 = 2131165369;
+			public const int text_size_12 = 2131165369;
 			
 			// aapt resource value: 0x7f0700ba
-			public const int text_size_14 = 2131165370;
+			public const int text_size_13 = 2131165370;
 			
 			// aapt resource value: 0x7f0700bb
-			public const int text_size_15 = 2131165371;
+			public const int text_size_14 = 2131165371;
 			
 			// aapt resource value: 0x7f0700bc
-			public const int text_size_16 = 2131165372;
+			public const int text_size_15 = 2131165372;
 			
 			// aapt resource value: 0x7f0700bd
-			public const int text_size_17 = 2131165373;
+			public const int text_size_16 = 2131165373;
 			
 			// aapt resource value: 0x7f0700be
-			public const int text_size_18 = 2131165374;
+			public const int text_size_17 = 2131165374;
 			
 			// aapt resource value: 0x7f0700bf
-			public const int text_size_20 = 2131165375;
+			public const int text_size_18 = 2131165375;
 			
 			// aapt resource value: 0x7f0700c0
-			public const int text_size_22 = 2131165376;
+			public const int text_size_20 = 2131165376;
 			
 			// aapt resource value: 0x7f0700c1
-			public const int text_size_24 = 2131165377;
+			public const int text_size_22 = 2131165377;
 			
 			// aapt resource value: 0x7f0700c2
-			public const int text_size_26 = 2131165378;
+			public const int text_size_24 = 2131165378;
 			
 			// aapt resource value: 0x7f0700c3
-			public const int text_size_32 = 2131165379;
+			public const int text_size_26 = 2131165379;
 			
 			// aapt resource value: 0x7f0700c4
-			public const int text_size_56 = 2131165380;
+			public const int text_size_32 = 2131165380;
 			
-			// aapt resource value: 0x7f0700b7
-			public const int text_size_9 = 2131165367;
+			// aapt resource value: 0x7f0700c5
+			public const int text_size_56 = 2131165381;
 			
-			// aapt resource value: 0x7f0700b2
-			public const int text_small = 2131165362;
+			// aapt resource value: 0x7f0700b8
+			public const int text_size_9 = 2131165368;
 			
-			// aapt resource value: 0x7f0700b0
-			public const int text_tinier = 2131165360;
+			// aapt resource value: 0x7f0700b3
+			public const int text_small = 2131165363;
 			
 			// aapt resource value: 0x7f0700b1
-			public const int text_tiny = 2131165361;
+			public const int text_tinier = 2131165361;
 			
-			// aapt resource value: 0x7f0700b6
-			public const int text_very_huge = 2131165366;
+			// aapt resource value: 0x7f0700b2
+			public const int text_tiny = 2131165362;
+			
+			// aapt resource value: 0x7f0700b7
+			public const int text_very_huge = 2131165367;
 			
 			// aapt resource value: 0x7f07005d
 			public const int tooltip_corner_radius = 2131165277;
@@ -9151,6 +9154,9 @@ namespace MusicStoreMobile.Droid
 			
 			// aapt resource value: 0x7f0e0001
 			public const int top_navigation_menu = 2131623937;
+			
+			// aapt resource value: 0x7f0e0002
+			public const int top_navigation_search_menu = 2131623938;
 			
 			static Menu()
 			{

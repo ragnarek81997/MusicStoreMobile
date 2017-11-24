@@ -18,11 +18,13 @@ namespace MusicStoreMobile.Core.ViewModels.Navigation
         {
             public string Title { get; set; }
 
+            public bool IsSearch { get; set; }
+
             public TopNavigationViewIconType HomeIconType { get; set; }
             public IMvxCommand HomeIconCommand { get; set; }
 
             public TopNavigationViewIconType ActionIconType { get; set; }
-            public IMvxCommand ActionIconCommand { get; set; }
+            public IMvxCommand<string> ActionIconCommand { get; set; }
         }
 
         private readonly IMvxNavigationService _navigationService;
@@ -58,6 +60,8 @@ namespace MusicStoreMobile.Core.ViewModels.Navigation
             if (parameter != null) {
                 Title.Value = parameter.Title;
 
+                IsSearch.Value = parameter.IsSearch;
+
                 HomeIconType.Value = parameter.HomeIconType;
                 HomeIconCommand = parameter.HomeIconCommand;
 
@@ -69,6 +73,9 @@ namespace MusicStoreMobile.Core.ViewModels.Navigation
         // MVVM Properties
 
         public readonly INC<string> Title = new NC<string>("");
+        public readonly INC<bool> IsShowTitle = new NC<bool>(true);
+
+        public readonly INC<bool> IsSearch = new NC<bool>(false);
 
         public readonly INC<TopNavigationViewIconType> HomeIconType = new NC<TopNavigationViewIconType>(TopNavigationViewIconType.None);
         public readonly INC<TopNavigationViewIconType> ActionIconType = new NC<TopNavigationViewIconType>(TopNavigationViewIconType.None);
@@ -76,7 +83,7 @@ namespace MusicStoreMobile.Core.ViewModels.Navigation
         // MVVM Commands
 
         public IMvxCommand HomeIconCommand { get; set; }
-        public IMvxCommand ActionIconCommand { get; set; }
+        public IMvxCommand<string> ActionIconCommand { get; set; }
 
         // Private methods
 

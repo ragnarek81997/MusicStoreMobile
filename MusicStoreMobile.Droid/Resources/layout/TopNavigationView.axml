@@ -11,7 +11,12 @@
      android:background="@color/White"
      android:theme="@style/top_navigation_view_theme"
      android:gravity="center_vertical"
-     local:contentInsetStartWithNavigation="0dp">
+     local:contentInsetStartWithNavigation="0dp"
+     android:padding="0dp"
+     local:contentInsetLeft="0dp"
+     local:contentInsetStart="0dp"
+     android:contentInsetLeft="0dp"
+     android:contentInsetStart="0dp">
     <TextView
       android:id="@+id/top_navigation_view_title"
       android:layout_width="match_parent"
@@ -20,11 +25,11 @@
       android:textSize="@dimen/text_very_huge"
       android:textColor="@color/Black"
       android:maxLines="1"
-      android:ellipsize="end" 
-      local:MvxBind="Text Title;"/>
+      android:ellipsize="end"
+      local:MvxBind="Text Title; Visibility Visibility(IsShowTitle)"/>
   </android.support.v7.widget.Toolbar>
   <View
     android:layout_width="match_parent"
     android:layout_height="@dimen/separator_line_size"
     android:background="@color/Black" />
-  </LinearLayout>
+</LinearLayout>

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace MusicStoreMobile.Core.Services.Interfaces
 {
@@ -18,6 +19,7 @@ namespace MusicStoreMobile.Core.Services.Interfaces
         Task<ServiceResult> SetTitle(string title);
         Task<ServiceResult> SetHomeIcon(TopNavigationViewIconType iconType, IMvxCommand iconCommand);
         Task<ServiceResult> SetActionIcon(TopNavigationViewIconType iconType, IMvxCommand iconCommand);
+        Task<ServiceResult> SetActionIcon(TopNavigationViewIconType iconType, IMvxCommand<string> iconCommand);
 
     }
 }
