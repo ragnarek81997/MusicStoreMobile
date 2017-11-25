@@ -14,7 +14,7 @@ namespace MusicStoreMobile.Core.Helpers.Interfaces
     {
         Task<ServiceResult<List<IMvxViewModel>>> Get<TViewModel>() where TViewModel : IMvxViewModel;
         Task<int> Close<TViewModel>(bool firstOrAll = false) where TViewModel : IMvxViewModel;
-        Task OnAdd<TViewModel>(TViewModel viewModel) where TViewModel : IMvxViewModel;
+        Task OnAdd<TViewModel>(TViewModel viewModel, bool addToBackStack) where TViewModel : IMvxViewModel;
         Task OnClose<TViewModel>(TViewModel viewModel) where TViewModel : IMvxViewModel;
     }
 }

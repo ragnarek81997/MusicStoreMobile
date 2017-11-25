@@ -78,7 +78,7 @@ namespace MusicStoreMobile.Core.ViewModels.Preferences
             {
                 Title = "Preferences",
                 HomeIconType = Enums.TopNavigationViewIconType.Back,
-                HomeIconCommand = new MvxCommand(async () => await _navigationService.Close(this))
+                HomeIconCommand = new MvxCommand(async () => await _navigationService.Close(this) )
             }
             );
             _bottomNavigationViewModelService.CheckItem(Enums.BottomNavigationViewCheckedItemType.None);
@@ -106,6 +106,8 @@ namespace MusicStoreMobile.Core.ViewModels.Preferences
 
             await _topNavigationViewModelService.Close();
             await _bottomNavigationViewModelService.Close();
+
+            ClearStack.Execute(null);
             await _navigationService.Navigate<LoginViewModel>();
 
             _userDialogs.HideLoading();

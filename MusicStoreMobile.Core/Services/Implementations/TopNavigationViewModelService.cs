@@ -3,6 +3,7 @@ using MusicStoreMobile.Core.Helpers.Interfaces;
 using MusicStoreMobile.Core.Services.Interfaces;
 using MusicStoreMobile.Core.ViewModelResults;
 using MusicStoreMobile.Core.ViewModels;
+using MusicStoreMobile.Core.ViewModels.Empty;
 using MusicStoreMobile.Core.ViewModels.Navigation;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
@@ -19,6 +20,7 @@ namespace MusicStoreMobile.Core.Services.Implementations
     {
         private readonly IMvxNavigationService _navigationService;
         private readonly INavigationViewModelManager _navigationViewModelManager;
+
         public TopNavigationViewModelService(IMvxNavigationService navigationService, INavigationViewModelManager navigationViewModelManager)
         {
             _navigationService = navigationService;
@@ -57,7 +59,7 @@ namespace MusicStoreMobile.Core.Services.Implementations
 
         public async Task Close()
         {
-            await _navigationViewModelManager.Close<TopNavigationViewModel>();
+            await _navigationService.Navigate<EmptyTopNavigationViewModel>();
         }
 
         public async Task<ServiceResult> SetTitle(string title)

@@ -3,6 +3,7 @@ using MusicStoreMobile.Core.Helpers.Interfaces;
 using MusicStoreMobile.Core.Services.Interfaces;
 using MusicStoreMobile.Core.ViewModelResults;
 using MusicStoreMobile.Core.ViewModels;
+using MusicStoreMobile.Core.ViewModels.Empty;
 using MusicStoreMobile.Core.ViewModels.Navigation;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
@@ -57,7 +58,7 @@ namespace MusicStoreMobile.Core.Services.Implementations
 
         public async Task Close()
         {
-            await _navigationViewModelManager.Close<BottomNavigationViewModel>();
+            await _navigationService.Navigate<EmptyBottomNavigationViewModel>();
         }
 
         public async Task<ServiceResult> CheckItem(BottomNavigationViewCheckedItemType checkedItem)

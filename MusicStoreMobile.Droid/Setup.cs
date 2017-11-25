@@ -26,6 +26,8 @@ using MvvmCross.Droid.Views.Attributes;
 using System;
 using MusicStoreMobile.Core.Helpers.Interfaces;
 using Android.Support.V7.Preferences;
+using MusicStoreMobile.Droid.Helpers;
+using System.Linq;
 
 namespace MusicStoreMobile.Droid
 {
@@ -95,19 +97,19 @@ namespace MusicStoreMobile.Droid
                 _navigationViewModelManager = navigationViewModelManager;
             }
 
-            public override void Close(IMvxViewModel viewModel)
+            protected override void ShowFragment(Type view, MvxFragmentPresentationAttribute attribute, MvxViewModelRequest request)
             {
-                base.Close(viewModel);
-                _navigationViewModelManager.OnClose(viewModel);
+                if (request is MvxViewModelInstanceRequest instanceRequest && instanceRequest.ViewModelInstance != null && attribute != null)
+                {
+                    _navigationViewModelManager.OnAdd(instanceRequest.ViewModelInstance, attribute.AddToBackStack);
+                }
+                base.ShowFragment(view, attribute, request);
             }
 
-            public override void Show(MvxViewModelRequest request)
+            protected override bool CloseFragment(IMvxViewModel viewModel, MvxFragmentPresentationAttribute attribute)
             {
-                if (request is MvxViewModelInstanceRequest instanceRequest && instanceRequest.ViewModelInstance != null)
-                {
-                    _navigationViewModelManager.OnAdd(instanceRequest.ViewModelInstance);
-                }
-                base.Show(request);
+                _navigationViewModelManager.OnClose(viewModel);
+                return base.CloseFragment(viewModel, attribute);
             }
         }
     }

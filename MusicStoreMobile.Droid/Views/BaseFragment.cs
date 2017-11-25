@@ -10,6 +10,7 @@ using MvvmCross.Droid.Support.V7.AppCompat;
 using MusicStoreMobile.Droid.Controls;
 using Android.Runtime;
 using MusicStoreMobile.Droid.Helpers;
+using MusicStoreMobile.Core.ViewModels;
 
 namespace MusicStoreMobile.Droid.Views
 {
@@ -31,6 +32,11 @@ namespace MusicStoreMobile.Droid.Views
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var ignore = base.OnCreateView(inflater, container, savedInstanceState);
+
+            if(ViewModel is BaseViewModel vm)
+            {
+                vm.ClearStack = new MvxCommand(()=> ClearStack() );
+            }
 
             var view = this.BindingInflate(FragmentId, null);
 
@@ -85,6 +91,19 @@ namespace MusicStoreMobile.Droid.Views
         public virtual void OnBackPressed()
         {
             KeyboardUtils.HideKeyboard(ParentActivity);
+        }
+
+        protected void ClearStack()
+        {
+            var fm = ParentActivity?.SupportFragmentManager;
+            if (fm != null)
+            {
+                var backStackCount = fm.BackStackEntryCount;
+                for (int pos = 0; pos < backStackCount; pos++)
+                {
+                    fm.PopBackStack();
+                }
+            }
         }
     }
 

@@ -4,6 +4,7 @@ using MusicStoreMobile.Core.ViewModelResults;
 using MusicStoreMobile.Core.ViewModels;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace MusicStoreMobile.Core.Helpers.Implementations
     {
         private readonly IMvxNavigationService _navigationService;
         private readonly IDictionaryDbService _dbService;
+
         public NavigationViewModelManager(IMvxNavigationService navigationService, IDictionaryDbService dbService)
         {
             _navigationService = navigationService;
@@ -48,21 +50,11 @@ namespace MusicStoreMobile.Core.Helpers.Implementations
                 closedCounter += 1;
 
                 await _navigationService.Close(viewModel);
+
                 if (firstOrAll)
                     break;
             }
             return closedCounter;
-        }
-
-        public async Task OnAdd<TViewModel>(TViewModel viewModel) where TViewModel : IMvxViewModel
-        {
-            if ((viewModel as IMvxViewModel) is null)
-                return;
-
-            var ctsResult = await _dbService.GetObject<List<IMvxViewModel>>(GetDbTokenName<IMvxViewModel>(viewModel));
-            var viewModelsObject = ctsResult.Success ? ctsResult.Result : new List<IMvxViewModel>();
-            viewModelsObject.Add(viewModel);
-            await _dbService.SaveObject<List<IMvxViewModel>>(viewModelsObject, GetDbTokenName<IMvxViewModel>(viewModel));
         }
 
         public async Task OnClose<TViewModel>(TViewModel viewModel) where TViewModel : IMvxViewModel
@@ -73,6 +65,17 @@ namespace MusicStoreMobile.Core.Helpers.Implementations
             var ctsResult = await _dbService.GetObject<List<IMvxViewModel>>(GetDbTokenName<IMvxViewModel>(viewModel));
             var viewModelsObject = ctsResult.Success ? ctsResult.Result : new List<IMvxViewModel>();
             viewModelsObject.Remove(viewModel);
+            await _dbService.SaveObject<List<IMvxViewModel>>(viewModelsObject, GetDbTokenName<IMvxViewModel>(viewModel));
+        }
+
+        public async Task OnAdd<TViewModel>(TViewModel viewModel, bool addToBackStack) where TViewModel : IMvxViewModel
+        {
+            if ((viewModel as IMvxViewModel) is null)
+                return;
+
+            var ctsResult = await _dbService.GetObject<List<IMvxViewModel>>(GetDbTokenName<IMvxViewModel>(viewModel));
+            var viewModelsObject = ctsResult.Success && addToBackStack ? ctsResult.Result : new List<IMvxViewModel>();
+            viewModelsObject.Add(viewModel);
             await _dbService.SaveObject<List<IMvxViewModel>>(viewModelsObject, GetDbTokenName<IMvxViewModel>(viewModel));
         }
     }

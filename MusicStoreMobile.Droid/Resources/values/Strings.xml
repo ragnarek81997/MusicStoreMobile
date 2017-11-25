@@ -5,22 +5,11 @@
   <string name="library">Library</string>
   <string name="preferences">Preferences</string>
 
-  <string name="add_album_title">Add album</string>
-  <string name="add_album_summary">Add new album</string>
-  
-  <string name="add_artist_title">Add artist</string>
-  <string name="add_artist_summary">Add new album</string>
-  
-  <string name="add_genre_title">Add genre</string>
-  <string name="add_genre_summary">Add new genre</string>
-  
-  <string name="add_playlist_title">Add playlist</string>
-  <string name="add_playlist_summary">Add new playlist</string>
-  
-  <string name="add_song_title">Add song</string>
-  <string name="add_song_summary">Add new song</string>
-
-  <string name="logout_title">Logout</string>
-  <string name="logout_summary">Logout from application</string>
+  <string name="add_album">Add album</string>
+  <string name="add_artist">Add artist</string>
+  <string name="add_genre">Add genre</string>
+  <string name="add_playlist">Add playlist</string>
+  <string name="add_song">Add song</string>
+  <string name="logout">Logout</string>
 
 </resources>

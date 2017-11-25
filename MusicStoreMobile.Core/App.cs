@@ -11,6 +11,7 @@ using Akavache;
 using MusicStoreMobile.Core.Helpers.Interfaces;
 using MusicStoreMobile.Core.Helpers.Implementations;
 using System;
+using MvvmCross.Platform.Core;
 
 namespace MusicStoreMobile.Core
 {

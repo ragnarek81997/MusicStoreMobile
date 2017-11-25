@@ -83,6 +83,13 @@ namespace MusicStoreMobile.Core.ViewModels.Auth
             base.Start();
         }
 
+        public override void ViewAppearing()
+        {
+            base.ViewAppearing();
+            _topNavigationViewModelService.Close();
+            _bottomNavigationViewModelService.Close();
+        }
+
         // MVVM Properties
 
         [Validators.NCFieldRequired("{0} is Required")]
@@ -125,8 +132,10 @@ namespace MusicStoreMobile.Core.ViewModels.Auth
                 var serviceResult = await _authService.Login(Email.Value, Password.Value);
                 if (serviceResult.Success)
                 {
-                    await _navigationService.Navigate<HomeViewModel>();
                     await _bottomNavigationViewModelService.Show(new BottomNavigationViewModel.PrepareModel() { CheckedItem = Enums.BottomNavigationViewCheckedItemType.Home });
+                    ClearStack.Execute(null);
+                    await _navigationService.Navigate<HomeViewModel>();
+                   
                     _userDialogs.HideLoading();
                 }
                 else

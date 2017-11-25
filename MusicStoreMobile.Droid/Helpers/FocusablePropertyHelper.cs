@@ -21,6 +21,8 @@ namespace MusicStoreMobile.Droid.Helpers
 
         public FocusablePropertyHelper(AppCompatActivity activity)
         {
+            var a = Android.App.Application.SynchronizationContext;
+
             _activity = activity;
         }
 

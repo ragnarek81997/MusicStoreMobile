@@ -20,6 +20,9 @@ namespace MusicStoreMobile.Core.ViewModels.Auth
     public class RegistrationViewModel : BaseViewModel
     {
         private readonly IMvxNavigationService _navigationService;
+        private readonly ITopNavigationViewModelService _topNavigationViewModelService;
+        private readonly IBottomNavigationViewModelService _bottomNavigationViewModelService;
+
         private readonly IAuthService _authService;
         private readonly IUserDialogs _userDialogs;
 
@@ -28,9 +31,12 @@ namespace MusicStoreMobile.Core.ViewModels.Auth
         //private readonly ILocationService _locationService;
         private readonly MvvmCross.Plugins.Validation.IMvxToastService _toastService;
 
-        public RegistrationViewModel(IMvxNavigationService navigationService, IAuthService authService, IUserDialogs userDialogs, IValidator validator/*, ILocationService locationService*/, MvvmCross.Plugins.Validation.IMvxToastService toastService)
+        public RegistrationViewModel(IMvxNavigationService navigationService, IAuthService authService, IUserDialogs userDialogs, IValidator validator/*, ILocationService locationService*/, MvvmCross.Plugins.Validation.IMvxToastService toastService, IBottomNavigationViewModelService bottomNavigationViewModelService, ITopNavigationViewModelService topNavigationViewModelService)
         {
             _navigationService = navigationService;
+            _topNavigationViewModelService = topNavigationViewModelService;
+            _bottomNavigationViewModelService = bottomNavigationViewModelService;
+
             _authService = authService;
             _userDialogs = userDialogs;
             _toastService = toastService;
@@ -88,6 +94,13 @@ namespace MusicStoreMobile.Core.ViewModels.Auth
             //{
             //    _toastService.DisplayError(ex.Message);
             //}
+        }
+
+        public override void ViewAppearing()
+        {
+            base.ViewAppearing();
+            _topNavigationViewModelService.Close();
+            _bottomNavigationViewModelService.Close();
         }
 
         // MVVM Properties

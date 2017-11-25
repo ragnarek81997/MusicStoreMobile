@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:fillViewport="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+      <LinearLayout
+          android:id="@+id/main_container"
+          android:focusable="true"
+          android:focusableInTouchMode="true"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingTop="@dimen/element_margin_small"
+          android:orientation="vertical">
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@color/White"
+          android:orientation="vertical">
+          <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_line_size"
+            android:background="@color/Black" />
+          <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_album"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_marginLeft="@dimen/element_margin_tiny"
+            android:layout_marginRight="@dimen/element_margin_tiny"
+            android:textAllCaps="true"
+            android:textColor="@color/Black" 
+            local:MvxBind="Click ShowAddAlbumViewModelCommand;"/>
+        </LinearLayout>
+        <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:background="@color/White"
+           android:orientation="vertical">
+          <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_line_size"
+            android:background="@color/Black" />
+          <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_artist"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_marginLeft="@dimen/element_margin_tiny"
+            android:layout_marginRight="@dimen/element_margin_tiny"
+            android:textAllCaps="true"
+            android:textColor="@color/Black" 
+            local:MvxBind="Click ShowAddArtistViewModelCommand;" />
+        </LinearLayout>
+        <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:background="@color/White"
+           android:orientation="vertical">
+          <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_line_size"
+            android:background="@color/Black" />
+          <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_genre"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_marginLeft="@dimen/element_margin_tiny"
+            android:layout_marginRight="@dimen/element_margin_tiny"
+            android:textAllCaps="true"
+            android:textColor="@color/Black"
+            local:MvxBind="Click ShowAddGenreViewModelCommand;" />
+        </LinearLayout>
+        <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:background="@color/White"
+           android:orientation="vertical">
+          <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_line_size"
+            android:background="@color/Black" />
+          <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_playlist"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_marginLeft="@dimen/element_margin_tiny"
+            android:layout_marginRight="@dimen/element_margin_tiny"
+            android:textAllCaps="true"
+            android:textColor="@color/Black"
+            local:MvxBind="Click ShowAddPlaylistViewModelCommand;" />
+        </LinearLayout>
+        <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:background="@color/White"
+           android:orientation="vertical">
+          <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_line_size"
+            android:background="@color/Black" />
+          <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_song"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_marginLeft="@dimen/element_margin_tiny"
+            android:layout_marginRight="@dimen/element_margin_tiny"
+            android:textAllCaps="true"
+            android:textColor="@color/Black"
+            local:MvxBind="Click ShowAddSongViewModelCommand;" />
+        </LinearLayout>
+        <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:background="@color/White"
+           android:orientation="vertical">
+          <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_line_size"
+            android:background="@color/Black" />
+          <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/logout"
+            android:background="?android:attr/selectableItemBackground"
+            android:layout_marginLeft="@dimen/element_margin_tiny"
+            android:layout_marginRight="@dimen/element_margin_tiny"
+            android:textAllCaps="true"
+            android:textColor="@color/Black"
+            local:MvxBind="Click LogOutCommand;" />
+        </LinearLayout>
+        <View
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/separator_line_size"
+          android:background="@color/Black" />
+      </LinearLayout>
+    </LinearLayout>
+  </ScrollView>
+</LinearLayout>
