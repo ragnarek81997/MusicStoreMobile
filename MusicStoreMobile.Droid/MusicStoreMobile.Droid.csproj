@@ -306,6 +306,7 @@
     <Compile Include="Views\Main\HomeView.cs" />
     <Compile Include="Views\Navigation\TopNavigationView.cs" />
     <Compile Include="Views\Navigation\BottomNavigationView.cs" />
+    <Compile Include="Views\Preferences\ChangeGenreView.cs" />
     <Compile Include="Views\Preferences\PreferencesView.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -341,6 +342,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\EmptyView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ChangeGenreView.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/White"
+    android:orientation="vertical">
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:fillViewport="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+      <LinearLayout
+          android:id="@+id/main_container"
+          android:focusable="true"
+          android:focusableInTouchMode="true"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:paddingTop="@dimen/element_margin_huge"
+          android:paddingBottom="@dimen/element_margin_huge"
+          android:paddingLeft="@dimen/element_margin_medium"
+          android:paddingRight="@dimen/element_margin_medium"
+          android:orientation="vertical">
+        <!--@dimen/element_margin_huge-->
+        <android.support.design.widget.TextInputLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/name_input_layout"
+               local:hintTextAppearance="@style/hint_input_appearance"
+               local:errorTextAppearance="@style/error_input_appearance"
+               local:errorEnabled="true"
+               local:MvxBind="Error Errors['Name']">
+          <android.support.v7.widget.AppCompatEditText
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/name_input"
+              android:textColor="@color/black"
+              android:textSize="@dimen/text_large"
+              android:hint="Name"
+              android:inputType="text"
+              android:theme="@style/edit_input_appearance"
+              android:textCursorDrawable="@null"
+              local:MvxBind="Text Name; LineColor InputLineColor(Errors['Name'])" />
+        </android.support.design.widget.TextInputLayout>
+      </LinearLayout>
+    </LinearLayout>
+  </ScrollView>
+</LinearLayout>

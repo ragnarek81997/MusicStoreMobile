@@ -37,6 +37,7 @@
     <Compile Include="Enums\BottomNavigationViewCheckedItemType.cs" />
     <Compile Include="Enums\TopNavigationViewIconType.cs" />
     <Compile Include="Helpers\Implementations\DictionaryBlobCache.cs" />
+    <Compile Include="Services\Implementations\GenreService.cs" />
     <Compile Include="Services\Implementations\BottomNavigationViewModelService.cs" />
     <Compile Include="Services\Implementations\TopNavigationViewModelService.cs" />
     <Compile Include="Helpers\Implementations\NavigationViewModelManager.cs" />
@@ -44,6 +45,7 @@
     <Compile Include="Helpers\Interfaces\IDictionaryBlobCache.cs" />
     <Compile Include="Helpers\Interfaces\INavigationFragmentManager.cs" />
     <Compile Include="Services\Interfaces\IBottomNavigationViewModelService.cs" />
+    <Compile Include="Services\Interfaces\IGenreService.cs" />
     <Compile Include="Services\Interfaces\ITopNavigationViewModelService.cs" />
     <Compile Include="Helpers\Interfaces\IValidationHelper.cs" />
     <Compile Include="Models\GenreModel.cs" />
@@ -102,6 +104,7 @@
     <Compile Include="ViewModels\Main\HomeViewModel.cs" />
     <Compile Include="ViewModels\Navigation\TopNavigationViewModel.cs" />
     <Compile Include="ViewModels\Navigation\BottomNavigationViewModel.cs" />
+    <Compile Include="ViewModels\Preferences\ChangeGenreViewModel.cs" />
     <Compile Include="ViewModels\Preferences\PreferencesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -26,9 +26,26 @@ namespace MusicStoreMobile.Core.ViewModels.Navigation
         {
             _navigationService = navigationService;
 
-            ShowHomeViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<HomeViewModel>());
-            ShowSearchViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<SearchViewModel>());
-            ShowLibraryViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<LibraryViewModel>());
+            ShowHomeViewModelCommand = new MvxAsyncCommand(async () => 
+            {
+                ClearStack.Execute(null);
+                await _navigationService.Navigate<HomeViewModel>();
+
+            });
+
+            ShowSearchViewModelCommand = new MvxAsyncCommand(async () =>
+            {
+                ClearStack.Execute(null);
+                await _navigationService.Navigate<SearchViewModel>();
+
+            });
+
+            ShowLibraryViewModelCommand = new MvxAsyncCommand(async () =>
+            {
+                ClearStack.Execute(null);
+                await _navigationService.Navigate<LibraryViewModel>();
+
+            });
         }
 
         // MvvmCross Lifecycle

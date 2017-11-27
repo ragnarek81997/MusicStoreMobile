@@ -9,8 +9,6 @@ namespace MusicStoreMobile.Core.Models
 {
     public class GenreModel : BaseEntity
     {
-        [Required]
-        [StringLength(40, MinimumLength = 3)]
         public string Name { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Acr.UserDialogs;
 using MusicStoreMobile.Core.Converters;
 using MusicStoreMobile.Core.Helpers.Interfaces;
+using MusicStoreMobile.Core.Models;
 using MusicStoreMobile.Core.Services.Interfaces;
 using MusicStoreMobile.Core.ViewModels.Auth;
 using MusicStoreMobile.Core.ViewModels.Navigation;
@@ -35,23 +36,22 @@ namespace MusicStoreMobile.Core.ViewModels.Preferences
             _userDialogs = userDialogs;
 
 
-            ShowAddAlbumViewModelCommand = new MvxCommand(() => 
+            ShowAddAlbumViewModelCommand = new MvxAsyncCommand(async () =>
             {
 
             });
-            ShowAddArtistViewModelCommand = new MvxCommand(() =>
+            ShowAddArtistViewModelCommand = new MvxAsyncCommand(async () =>
             {
 
             });
-            ShowAddGenreViewModelCommand = new MvxCommand(() => 
+
+            ShowAddGenreViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChangeGenreViewModel>());
+
+            ShowAddPlaylistViewModelCommand = new MvxAsyncCommand(async () => 
             {
 
             });
-            ShowAddPlaylistViewModelCommand = new MvxCommand(() => 
-            {
-
-            });
-            ShowAddSongViewModelCommand = new MvxCommand(() => 
+            ShowAddSongViewModelCommand = new MvxAsyncCommand(async() => 
             {
 
             });
@@ -89,11 +89,11 @@ namespace MusicStoreMobile.Core.ViewModels.Preferences
         public readonly INC<INotifyTaskCompletion> LogOutTask = new NC<INotifyTaskCompletion>();
 
         // MVVM Commands
-        public IMvxCommand ShowAddAlbumViewModelCommand { get; private set; }
-        public IMvxCommand ShowAddArtistViewModelCommand { get; private set; }
-        public IMvxCommand ShowAddGenreViewModelCommand { get; private set; }
-        public IMvxCommand ShowAddPlaylistViewModelCommand { get; private set; }
-        public IMvxCommand ShowAddSongViewModelCommand { get; private set; }
+        public IMvxAsyncCommand ShowAddAlbumViewModelCommand { get; private set; }
+        public IMvxAsyncCommand ShowAddArtistViewModelCommand { get; private set; }
+        public IMvxAsyncCommand ShowAddGenreViewModelCommand { get; private set; }
+        public IMvxAsyncCommand ShowAddPlaylistViewModelCommand { get; private set; }
+        public IMvxAsyncCommand ShowAddSongViewModelCommand { get; private set; }
 
         public IMvxCommand LogOutCommand { get; private set; }
 
