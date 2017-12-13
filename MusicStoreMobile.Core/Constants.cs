@@ -4,7 +4,7 @@ namespace MusicStoreMobile.Core
 {
     public static class Constants
     {
-        public const string IpServerPort = "http://192.168.0.101:45455/";
+        public const string IpServerPort = "http://192.168.148.2:45455/";
         //public const string IpServerPort = "http://musicstoreserver.azurewebsites.net/";
 
         //public const string SignalRHubUrl = "musicstoremobile-realtime";

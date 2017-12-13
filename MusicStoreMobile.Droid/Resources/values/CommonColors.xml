@@ -3,7 +3,7 @@
   <!-- Material colors -->
   <color name="colorPrimary">#1a1a1a</color>
   <color name="colorPrimaryDark">#000000</color>
-  <color name="colorAccent">#C1272C</color>
+  <color name="colorAccent">@color/Gray</color>
   <color name="colorRipple">#A9A9F5</color>
 
   <!-- White to Black -->

@@ -14,23 +14,23 @@ using System.Net.Http.Headers;
 
 namespace MusicStoreMobile.Core.Services.Implementations
 {
-    public class GenreService : IGenreService
+    public class AlbumService : IAlbumService
     {
         private readonly IRestClient _restClient;
         private readonly IAuthorizedUserService _authorizedUserService;
 
         private const string _ipServerPort = Constants.IpServerPort;
-        private const string _apiControllerRoutePrefix = "v1/genre";
+        private const string _apiControllerRoutePrefix = "v1/album";
 
-        public GenreService(IRestClient restClient, IAuthorizedUserService authorizedUserService)
+        public AlbumService(IRestClient restClient, IAuthorizedUserService authorizedUserService)
         {
             _restClient = restClient;
             _authorizedUserService = authorizedUserService;
         }
 
-        public async Task<ServiceResult<GenreModel>> Get(string id)
+        public async Task<ServiceResult<AlbumModel>> Get(string id)
         {
-            var serviceResult = new ServiceResult<GenreModel>();
+            var serviceResult = new ServiceResult<AlbumModel>();
 
             var getAuthorizedUserServiceResult = await _authorizedUserService.Get();
 
@@ -40,7 +40,7 @@ namespace MusicStoreMobile.Core.Services.Implementations
 
                 var restUrl = $"{_ipServerPort}{_apiControllerRoutePrefix}/Get" + "?id=" + id;
 
-                var restServiceResult = await _restClient.MakeApiCall<GenreModel>
+                var restServiceResult = await _restClient.MakeApiCall<AlbumModel>
                 (
                     restUrl,
                     HttpMethod.Get,
@@ -65,9 +65,9 @@ namespace MusicStoreMobile.Core.Services.Implementations
             return serviceResult;
         }
 
-        public async Task<ServiceResult<List<GenreModel>>> GetMany(int skip, int take)
+        public async Task<ServiceResult<List<AlbumModel>>> GetMany(int skip, int take)
         {
-            var serviceResult = new ServiceResult<List<GenreModel>>();
+            var serviceResult = new ServiceResult<List<AlbumModel>>();
 
             var getAuthorizedUserServiceResult = await _authorizedUserService.Get();
 
@@ -77,7 +77,7 @@ namespace MusicStoreMobile.Core.Services.Implementations
 
                 var restUrl = $"{_ipServerPort}{_apiControllerRoutePrefix}/GetMany" + "?skip=" + skip + "&take=" + take;
 
-                var restServiceResult = await _restClient.MakeApiCall<List<GenreModel>>
+                var restServiceResult = await _restClient.MakeApiCall<List<AlbumModel>>
                 (
                     restUrl,
                     HttpMethod.Get,
@@ -102,9 +102,9 @@ namespace MusicStoreMobile.Core.Services.Implementations
             return serviceResult;
         }
 
-        public async Task<ServiceResult<GenreModel>> Add(GenreModel model)
+        public async Task<ServiceResult<AlbumResultModel>> Add(AlbumResultModel model)
         {
-            var serviceResult = new ServiceResult<GenreModel>();
+            var serviceResult = new ServiceResult<AlbumResultModel>();
 
             var getAuthorizedUserServiceResult = await _authorizedUserService.Get();
 
@@ -114,7 +114,7 @@ namespace MusicStoreMobile.Core.Services.Implementations
 
                 var restUrl = $"{_ipServerPort}{_apiControllerRoutePrefix}/Add";
 
-                var restServiceResult = await _restClient.MakeApiCall<GenreModel>
+                var restServiceResult = await _restClient.MakeApiCall<AlbumResultModel>
                 (
                     restUrl,
                     HttpMethod.Post,
@@ -140,9 +140,9 @@ namespace MusicStoreMobile.Core.Services.Implementations
             return serviceResult;
         }
 
-        public async Task<ServiceResult<GenreModel>> Update(GenreModel model)
+        public async Task<ServiceResult<AlbumResultModel>> Update(AlbumResultModel model)
         {
-            var serviceResult = new ServiceResult<GenreModel>();
+            var serviceResult = new ServiceResult<AlbumResultModel>();
 
             var getAuthorizedUserServiceResult = await _authorizedUserService.Get();
 
@@ -152,7 +152,7 @@ namespace MusicStoreMobile.Core.Services.Implementations
 
                 var restUrl = $"{_ipServerPort}{_apiControllerRoutePrefix}/Update";
 
-                var restServiceResult = await _restClient.MakeApiCall<GenreModel>
+                var restServiceResult = await _restClient.MakeApiCall<AlbumResultModel>
                 (
                     restUrl,
                     HttpMethod.Post,
@@ -178,9 +178,9 @@ namespace MusicStoreMobile.Core.Services.Implementations
             return serviceResult;
         }
 
-        public async Task<ServiceResult<List<GenreModel>>> GetMany(string searchQuery, int skip, int take)
+        public async Task<ServiceResult<List<AlbumModel>>> GetMany(string searchQuery, int skip, int take)
         {
-            var serviceResult = new ServiceResult<List<GenreModel>>();
+            var serviceResult = new ServiceResult<List<AlbumModel>>();
 
             var getAuthorizedUserServiceResult = await _authorizedUserService.Get();
 
@@ -190,7 +190,7 @@ namespace MusicStoreMobile.Core.Services.Implementations
 
                 var restUrl = $"{_ipServerPort}{_apiControllerRoutePrefix}/GetMany" + "?searchQuery=" + searchQuery + "&skip=" + skip + "&take=" + take;
 
-                var restServiceResult = await _restClient.MakeApiCall<List<GenreModel>>
+                var restServiceResult = await _restClient.MakeApiCall<List<AlbumModel>>
                 (
                     restUrl,
                     HttpMethod.Get,

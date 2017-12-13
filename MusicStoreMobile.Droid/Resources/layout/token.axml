@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/element_margin_tiny"
+    android:paddingRight="@dimen/element_margin_tiny"
+    android:background="@drawable/token_background">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textColor="@color/gray_text"
+        android:textSize="18sp"
+        local:MvxBind="Text Name;"
+        android:layout_toLeftOf="@+id/button"
+        android:maxLines="1"
+        android:ellipsize="end" />
+    <ImageView
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_cancel"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:tint="@color/gray_text"
+        local:MvxBind="Click RemoveCommand;"
+        android:layout_marginLeft="@dimen/element_margin_tiny" />
+</RelativeLayout>

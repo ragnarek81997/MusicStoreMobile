@@ -36,25 +36,15 @@ namespace MusicStoreMobile.Core.ViewModels.Preferences
             _userDialogs = userDialogs;
 
 
-            ShowAddAlbumViewModelCommand = new MvxAsyncCommand(async () =>
-            {
+            ShowAddAlbumViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChangeAlbumViewModel>());
 
-            });
-            ShowAddArtistViewModelCommand = new MvxAsyncCommand(async () =>
-            {
-
-            });
+            ShowAddArtistViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChangeArtistViewModel>());
 
             ShowAddGenreViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChangeGenreViewModel>());
 
-            ShowAddPlaylistViewModelCommand = new MvxAsyncCommand(async () => 
-            {
+            ShowAddPlaylistViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChangePlaylistViewModel>());
 
-            });
-            ShowAddSongViewModelCommand = new MvxAsyncCommand(async() => 
-            {
-
-            });
+            ShowAddSongViewModelCommand = new MvxAsyncCommand(async () => await _navigationService.Navigate<ChangeSongViewModel>());
 
             LogOutCommand = new MvxCommand( () =>
             {

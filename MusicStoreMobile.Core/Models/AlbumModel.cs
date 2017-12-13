@@ -14,10 +14,9 @@ namespace MusicStoreMobile.Core.Models
         public string ArtId { get; set; }
 
         [Required]
-        public ICollection<ArtistModel> Artists { get; set; }
+        public virtual ICollection<ArtistModel> Artists { get; set; }
         [Required]
-        public ICollection<GenreModel> Genres { get; set; }
-        [Required]
-        public ICollection<SongModel> Songs { get; set; }
+        public virtual ICollection<GenreModel> Genres { get; set; }
+        public virtual ICollection<SongModel> Songs { get; set; }
     }
 }

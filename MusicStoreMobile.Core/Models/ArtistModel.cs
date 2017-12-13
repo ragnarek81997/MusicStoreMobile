@@ -10,5 +10,10 @@ namespace MusicStoreMobile.Core.Models
         public string Name { get; set; }
         [StringLength(24, MinimumLength = 24)]
         public string ArtId { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

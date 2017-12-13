@@ -11,6 +11,7 @@ namespace MusicStoreMobile.Core.Services.Interfaces
     public interface IGenreService
     {
         Task<ServiceResult<GenreModel>> Get(string id);
+        Task<ServiceResult<List<GenreModel>>> GetMany(string searchQuery, int skip, int take);
         Task<ServiceResult<List<GenreModel>>> GetMany(int skip, int take);
         Task<ServiceResult<GenreModel>> Add(GenreModel model);
         Task<ServiceResult<GenreModel>> Update(GenreModel model);

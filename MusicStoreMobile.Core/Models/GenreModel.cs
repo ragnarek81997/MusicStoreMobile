@@ -10,5 +10,9 @@ namespace MusicStoreMobile.Core.Models
     public class GenreModel : BaseEntity
     {
         public string Name { get; set; }
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

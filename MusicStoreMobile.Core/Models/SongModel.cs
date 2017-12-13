@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace MusicStoreMobile.Core.Models
 {
@@ -10,8 +11,6 @@ namespace MusicStoreMobile.Core.Models
         [Required]
         [StringLength(40, MinimumLength = 3)]
         public string Name { get; set; }
-        [Required]
-        public AlbumModel Album { get; set; }
         [StringLength(24, MinimumLength = 24)]
         public string ArtId { get; set; }
 
@@ -20,5 +19,10 @@ namespace MusicStoreMobile.Core.Models
         public ICollection<ArtistModel> Artists { get; set; }
         [Required]
         public ICollection<GenreModel> Genres { get; set; }
+
+        public override string ToString()
+        {
+            return Name + (Artists != null ? " - " + string.Join(", ", Artists.Select(_ => _.Name)) : "");
+        }
     }
 }

@@ -13,9 +13,11 @@ namespace MusicStoreMobile.Core.Models
         [StringLength(40, MinimumLength = 3)]
         public string Name { get; set; }
         [Required]
-        public ApplicationUserModel Owner { get; set; }
+        public string OwnerId { get; set; }
         [StringLength(24, MinimumLength = 24)]
         public string ArtId { get; set; }
-        public ICollection<SongModel> Songs { get; set; }
+
+        public virtual ApplicationUserModel Owner { get; set; }
+        public virtual ICollection<SongModel> Songs { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using MvvmCross.FieldBinding;
 using MvvmCross.Plugins.Validation;
 using System;
+using System.Collections.ObjectModel;
 using System.Reflection;
 
 namespace MusicStoreMobile.Core.Validators
@@ -18,14 +19,18 @@ namespace MusicStoreMobile.Core.Validators
 
         public IErrorInfo Validate(string fieldName, object value, object subject)
         {
-            if (value.GetType().GenericTypeArguments[0].GetTypeInfo().IsGenericType && value.GetType().GenericTypeArguments[0].GetGenericTypeDefinition().Equals(typeof(Nullable<>)))
+            if (value != null && value.GetType().GenericTypeArguments?[0] != null && value.GetType().GenericTypeArguments[0].GetTypeInfo().IsGenericType)
             {
-                return Validate(fieldName, ((INC<T>)value).Value, subject);
+                var genericType = value.GetType().GenericTypeArguments[0];
+
+                var a = genericType.GetGenericTypeDefinition().Equals(typeof(Nullable<>));
+                if (a)
+                {
+                    return Validate(fieldName, ((INC<T>)value).Value, subject);
+                }
             }
-            else
-            {
-                return Validate(fieldName, (T)value, subject);
-            }
+
+            return Validate(fieldName, (T)value, subject);
         }
 
         public IErrorInfo Validate(string fieldName, T value, object subject)

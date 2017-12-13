@@ -32,6 +32,7 @@
                local:hintTextAppearance="@style/hint_input_appearance"
                local:errorTextAppearance="@style/error_input_appearance"
                local:errorEnabled="true"
+               android:layout_marginBottom="@dimen/element_margin_small"
                local:MvxBind="Error Errors['Name']">
           <android.support.v7.widget.AppCompatEditText
               android:layout_width="match_parent"
@@ -45,6 +46,32 @@
               android:textCursorDrawable="@null"
               local:MvxBind="Text Name; LineColor InputLineColor(Errors['Name'])" />
         </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:id="@+id/genres_input_layout"
+               local:hintTextAppearance="@style/hint_input_appearance"
+               local:errorTextAppearance="@style/error_input_appearance"
+               local:errorEnabled="true"
+               local:MvxBind="Error Errors['Songs']">
+          <mvvmcross.binding.droid.views.MvxAutoCompleteTextView
+              android:id="@+id/songs_input"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:textColor="@color/black"
+              android:textSize="@dimen/text_large"
+              android:hint="Songs"
+              android:inputType="text"
+              android:textCursorDrawable="@null"
+              local:MvxBind="Text SongsArticle; ItemsSource SongsSuggestions; SelectedObject SongsSelectedObject; PartialText SongsCurrentTextHint;"/>
+        </android.support.design.widget.TextInputLayout>
+        <mvvmcross.droid.support.v7.recyclerview.DividedRecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            local:MvxItemTemplate="@layout/token"
+            android:nestedScrollingEnabled="false"
+            android:layout_marginBottom="@dimen/element_margin_medium"
+            local:MvxBind="ItemsSource Songs" />
       </LinearLayout>
     </LinearLayout>
   </ScrollView>

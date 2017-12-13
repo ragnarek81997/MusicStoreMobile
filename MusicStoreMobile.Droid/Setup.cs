@@ -69,8 +69,8 @@ namespace MusicStoreMobile.Droid
             MvxPreferenceSetupHelper.FillTargetFactories(registry);
 
             registry.RegisterFactory(new MvxCustomBindingFactory<SwipeRefreshLayout>("IsRefreshing", (swipeRefreshLayout) => new SwipeRefreshLayoutIsRefreshingTargetBinding(swipeRefreshLayout)));
-            registry.RegisterCustomBindingFactory<Android.Widget.EditText>("LineColor", (view) => new ValidationEditTextViewTargetBinding(view));
 
+            registry.RegisterCustomBindingFactory<Android.Widget.EditText>("LineColor", (view) => new ValidationEditTextViewTargetBinding(view));
             registry.RegisterCustomBindingFactory<Preference>("Click", (pref) => new MvxPreferenceClickTargetBinding(pref));
             
         }

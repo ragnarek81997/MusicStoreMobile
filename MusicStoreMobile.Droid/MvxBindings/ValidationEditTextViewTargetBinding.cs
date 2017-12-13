@@ -12,6 +12,7 @@ using Android.Widget;
 using Android.Content.Res;
 using MvvmCross.Binding.Droid.Target;
 using Android.Support.V7.Widget;
+using MvvmCross.Binding.Droid.Views;
 
 namespace MusicStoreMobile.Droid.MvxBindings
 {
@@ -26,7 +27,7 @@ namespace MusicStoreMobile.Droid.MvxBindings
 
         protected override void SetValueImpl(object target, object value)
         {
-            ((AppCompatEditText)target).SupportBackgroundTintList = (ColorStateList)value;
+               ((AppCompatEditText)target).SupportBackgroundTintList = (ColorStateList)value;
         }
 
     }

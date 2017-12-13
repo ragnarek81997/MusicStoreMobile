@@ -23,7 +23,7 @@ using MusicStoreMobile.Core.ViewModels.Main;
 
 namespace MusicStoreMobile.Core.ViewModels.Preferences
 {
-    public class ChangeGenreViewModel : BaseViewModel<GenreModel>
+    public class ChangeArtistViewModel : BaseViewModel<ArtistModel>
     {
         private readonly IMvxNavigationService _navigationService;
         private readonly ITopNavigationViewModelService _topNavigationViewModelService;
@@ -33,9 +33,9 @@ namespace MusicStoreMobile.Core.ViewModels.Preferences
 
         private readonly IValidationHelper _validationHelper;
 
-        private readonly IGenreService _genreService;
+        private readonly IArtistService _artistService;
 
-        public ChangeGenreViewModel(IMvxNavigationService navigationService, IUserDialogs userDialogs, IValidator validator, IGenreService genreService, IBottomNavigationViewModelService bottomNavigationViewModelService, ITopNavigationViewModelService topNavigationViewModelService)
+        public ChangeArtistViewModel(IMvxNavigationService navigationService, IUserDialogs userDialogs, IValidator validator, IArtistService artistService, IBottomNavigationViewModelService bottomNavigationViewModelService, ITopNavigationViewModelService topNavigationViewModelService)
         {
             _navigationService = navigationService;
             _topNavigationViewModelService = topNavigationViewModelService;
@@ -45,7 +45,7 @@ namespace MusicStoreMobile.Core.ViewModels.Preferences
 
             _validationHelper = new ValidationHelper(validator, this, Errors.Value, (propertyName) => { FocusName.Value = propertyName; });
 
-            _genreService = genreService;
+            _artistService = artistService;
 
             ValidateNameCommand = new MvxCommand(() => _validationHelper.Validate(() => Name));
 
@@ -63,7 +63,7 @@ namespace MusicStoreMobile.Core.ViewModels.Preferences
         }
 
         // MvvmCross Lifecycle
-        public override void Prepare(GenreModel parameter)
+        public override void Prepare(ArtistModel parameter)
         {
             if (parameter != null)
             {
@@ -82,7 +82,7 @@ namespace MusicStoreMobile.Core.ViewModels.Preferences
             base.ViewAppearing();
             _topNavigationViewModelService.Show(new TopNavigationViewModel.PrepareModel()
             {
-                Title = (string.IsNullOrWhiteSpace(Id.Value) ? "Add" : "Update") + " genre",
+                Title = (string.IsNullOrWhiteSpace(Id.Value) ? "Add" : "Update") + " artist",
                 HomeIconType = Enums.TopNavigationViewIconType.Back,
                 HomeIconCommand = new MvxCommand(async () => await _navigationService.Close(this)),
                 ActionIconType = Enums.TopNavigationViewIconType.Done,
@@ -122,17 +122,17 @@ namespace MusicStoreMobile.Core.ViewModels.Preferences
 
             if (_validationHelper.Validate())
             {
-                _userDialogs.ShowLoading((string.IsNullOrWhiteSpace(Id.Value) ? "Add" : "Update") + " genre");
+                _userDialogs.ShowLoading((string.IsNullOrWhiteSpace(Id.Value) ? "Add" : "Update") + " artist");
 
-                var serviceResult = new ServiceResult<GenreModel>();
+                var serviceResult = new ServiceResult<ArtistModel>();
 
                 if (string.IsNullOrWhiteSpace(Id.Value))
                 {
-                    serviceResult = await _genreService.Add(new GenreModel() { Id = Id.Value, Name = Name.Value });
+                    serviceResult = await _artistService.Add(new ArtistModel() { Id = Id.Value, Name = Name.Value });
                 }
                 else
                 {
-                    serviceResult = await _genreService.Update(new GenreModel() { Id = Id.Value, Name = Name.Value });
+                    serviceResult = await _artistService.Update(new ArtistModel() { Id = Id.Value, Name = Name.Value });
                 }
 
                 if (serviceResult.Success)
