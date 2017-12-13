@@ -65,10 +65,10 @@
               android:textCursorDrawable="@null"
               local:MvxBind="Text SongsArticle; ItemsSource SongsSuggestions; SelectedObject SongsSelectedObject; PartialText SongsCurrentTextHint;"/>
         </android.support.design.widget.TextInputLayout>
-        <mvvmcross.droid.support.v7.recyclerview.DividedRecyclerView
+        <mvvmcross.droid.support.v7.recyclerview.TransparentDividedRecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            local:MvxItemTemplate="@layout/token"
+            local:MvxItemTemplate="@layout/item_token"
             android:nestedScrollingEnabled="false"
             android:layout_marginBottom="@dimen/element_margin_medium"
             local:MvxBind="ItemsSource Songs" />

@@ -1,27 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:local="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Green"
-    android:orientation="vertical">
-  <ScrollView
-      android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:layout_weight="1"
-      android:fillViewport="true">
+    android:background="@color/White">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-      <LinearLayout
-          android:id="@+id/main_container"
-          android:focusable="true"
-          android:focusableInTouchMode="true"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="vertical">
-      </LinearLayout>
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/element_margin_large"
+        android:layout_marginBottom="@dimen/element_margin_large"
+        android:layout_marginLeft="@dimen/element_margin_huge"
+        android:layout_marginRight="@dimen/element_margin_huge"
+        android:layout_centerVertical="true"
+        local:MvxBind="Visibility Visibility(And(IsEmptyCollection(Songs), IsEmptyCollection(Artists), IsEmptyCollection(Albums), IsEmptyCollection(Playlists)))">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_search_big"
+                android:tint="@color/Black"
+                local:MvxBind="Visibility Visibility(IsEmptyString(SearchQuery))" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_warning_big"
+                android:tint="@color/Black"
+                local:MvxBind="Visibility InvertedVisibility(IsEmptyString(SearchQuery))" />
+        </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Black"
+            android:textSize="@dimen/text_very_huge"
+            android:layout_marginTop="@dimen/element_margin_large"
+            android:layout_marginBottom="@dimen/element_margin_small"
+            local:MvxBind="Text If(IsEmptyString(SearchQuery), 'Search', 'No results found for &quot;' + SearchQuery + '&quot;')"
+            android:gravity="center_horizontal" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/Black"
+            android:textSize="@dimen/text_large"
+            android:gravity="center_horizontal"
+            local:MvxBind="Text If(IsEmptyString(SearchQuery), 'Find your favorite songs, artists, albums and playlists.', 'Please check you have the right spelling, or try different keywords.')" />
     </LinearLayout>
-  </ScrollView>
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        local:MvxBind="Visibility InvertedVisibility(And(IsEmptyCollection(Songs), IsEmptyCollection(Artists), IsEmptyCollection(Albums), IsEmptyCollection(Playlists)))">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fillViewport="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/main_container"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/element_margin_large"
+                    android:layout_marginLeft="@dimen/element_margin_small"
+                    android:layout_marginRight="@dimen/element_margin_small"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/element_margin_large"
+                        android:orientation="vertical"
+                        local:MvxBind="Visibility InvertedVisibility(IsEmptyCollection(Songs))">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/Black"
+                            android:textSize="@dimen/text_very_huge"
+                            android:layout_marginBottom="@dimen/element_margin_small"
+                            android:text="Songs"
+                            android:gravity="center_horizontal" />
+                        <mvvmcross.droid.support.v7.recyclerview.TransparentDividedRecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            local:MvxItemTemplate="@layout/item_token_detailed"
+                            android:nestedScrollingEnabled="false"
+                            android:layout_marginBottom="@dimen/element_margin_small"
+                            local:MvxBind="ItemsSource Songs" />
+                        <Button
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:paddingLeft="@dimen/element_margin_small"
+                            android:paddingRight="@dimen/element_margin_small"
+                            android:text="See more ..." />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/element_margin_large"
+                        android:orientation="vertical"
+                        local:MvxBind="Visibility InvertedVisibility(IsEmptyCollection(Artists))">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/Black"
+                            android:textSize="@dimen/text_very_huge"
+                            android:layout_marginBottom="@dimen/element_margin_small"
+                            android:text="Artists"
+                            android:gravity="center_horizontal" />
+                        <mvvmcross.droid.support.v7.recyclerview.TransparentDividedRecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            local:MvxItemTemplate="@layout/item_token_detailed"
+                            android:nestedScrollingEnabled="false"
+                            android:layout_marginBottom="@dimen/element_margin_small"
+                            local:MvxBind="ItemsSource Artists" />
+                      <Button
+                          android:layout_height="wrap_content"
+                          android:layout_width="wrap_content"
+                          android:paddingLeft="@dimen/element_margin_small"
+                          android:paddingRight="@dimen/element_margin_small"
+                          android:text="See more ..." />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/element_margin_large"
+                        android:orientation="vertical"
+                        local:MvxBind="Visibility InvertedVisibility(IsEmptyCollection(Albums))">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/Black"
+                            android:textSize="@dimen/text_very_huge"
+                            android:layout_marginBottom="@dimen/element_margin_small"
+                            android:text="Albums"
+                            android:gravity="center_horizontal" />
+                        <mvvmcross.droid.support.v7.recyclerview.TransparentDividedRecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            local:MvxItemTemplate="@layout/item_token_detailed"
+                            android:nestedScrollingEnabled="false"
+                            android:layout_marginBottom="@dimen/element_margin_small"
+                            local:MvxBind="ItemsSource Albums" />
+                      <Button
+                          android:layout_height="wrap_content"
+                          android:layout_width="wrap_content"
+                          android:paddingLeft="@dimen/element_margin_small"
+                          android:paddingRight="@dimen/element_margin_small"
+                          android:text="See more ..." />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/element_margin_large"
+                        android:orientation="vertical"
+                        local:MvxBind="Visibility InvertedVisibility(IsEmptyCollection(Playlists))">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/Black"
+                            android:textSize="@dimen/text_very_huge"
+                            android:layout_marginBottom="@dimen/element_margin_small"
+                            android:text="Playlists"
+                            android:gravity="center_horizontal" />
+                        <mvvmcross.droid.support.v7.recyclerview.TransparentDividedRecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            local:MvxItemTemplate="@layout/item_token_detailed"
+                            android:nestedScrollingEnabled="false"
+                            android:layout_marginBottom="@dimen/element_margin_small"
+                            local:MvxBind="ItemsSource Playlists" />
+                      <Button
+                          android:layout_height="wrap_content"
+                          android:layout_width="wrap_content"
+                          android:paddingLeft="@dimen/element_margin_small"
+                          android:paddingRight="@dimen/element_margin_small"
+                          android:text="See more ..." />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</RelativeLayout>

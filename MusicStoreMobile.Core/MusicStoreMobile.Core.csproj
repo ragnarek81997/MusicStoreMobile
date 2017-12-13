@@ -31,6 +31,8 @@
   <ItemGroup>
     <Compile Include="AkavacheSqliteLinkerOverride.cs" />
     <Compile Include="Controls\ObservableDictionary.cs" />
+    <Compile Include="Converters\IsEmptyCollectionValueConverter.cs" />
+    <Compile Include="Converters\IsEmptyStringValueConverter.cs" />
     <Compile Include="Converters\IsTaskExecutedValueConverter.cs" />
     <Compile Include="Converters\InvertedValueConverter.cs" />
     <Compile Include="Enums\BlobCacheType.cs" />
@@ -84,6 +86,12 @@
     <Compile Include="ViewModels\Empty\EmptyAudioPlayerViewModel.cs" />
     <Compile Include="ViewModels\Empty\EmptyBottomNavigationViewModel.cs" />
     <Compile Include="ViewModels\Empty\EmptyTopNavigationViewModel.cs" />
+    <Compile Include="ViewModels\Items\GenreViewModel.cs" />
+    <Compile Include="ViewModels\Items\ArtistViewModel.cs" />
+    <Compile Include="ViewModels\Items\LinkViewModel.cs" />
+    <Compile Include="ViewModels\Items\AlbumViewModel.cs" />
+    <Compile Include="ViewModels\Items\PlaylistViewModel.cs" />
+    <Compile Include="ViewModels\Items\SongViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Rest\Interfaces\IRestClient.cs" />
     <Compile Include="Rest\Implementations\RestClient.cs" />

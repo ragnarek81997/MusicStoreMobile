@@ -20,18 +20,18 @@ using MusicStoreMobile.Droid.Extensions;
 
 namespace MusicStoreMobile.Droid.Controls
 {
-    [Register("mvvmcross.droid.support.v7.recyclerview.DividedRecyclerView")]
-    public sealed class DividedRecyclerView : MvxRecyclerView
+    [Register("mvvmcross.droid.support.v7.recyclerview.TransparentDividedRecyclerView")]
+    public sealed class TransparentDividedRecyclerView : MvxRecyclerView
     {
-        public DividedRecyclerView(Context context, IAttributeSet attrs) : this(context, attrs, 0, new MvxRecyclerAdapter())
+        public TransparentDividedRecyclerView(Context context, IAttributeSet attrs) : this(context, attrs, 0, new MvxRecyclerAdapter())
         {
         }
 
-        public DividedRecyclerView(Context context, IAttributeSet attrs, int defStyle) : this(context, attrs, defStyle, new MvxRecyclerAdapter())
+        public TransparentDividedRecyclerView(Context context, IAttributeSet attrs, int defStyle) : this(context, attrs, defStyle, new MvxRecyclerAdapter())
         {
         }
 
-        public DividedRecyclerView(Context context, IAttributeSet attrs, int defStyle, IMvxRecyclerAdapter adapter) : base(context, attrs, defStyle, adapter)
+        public TransparentDividedRecyclerView(Context context, IAttributeSet attrs, int defStyle, IMvxRecyclerAdapter adapter) : base(context, attrs, defStyle, adapter)
         {
             Setup(context);
         }
@@ -45,7 +45,42 @@ namespace MusicStoreMobile.Droid.Controls
 
         private void Setup(Context context)
         {
-            SetDivider(context, AppCompatExtensions.GetDrawable(Resource.Drawable.token_divider_shape).Mutate());
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+            this.SetLayoutManager(linearLayoutManager);
+
+            SetDivider(context, AppCompatExtensions.GetDrawable(Resource.Drawable.transparent_divider_shape).Mutate());
+        }
+    }
+
+    [Register("mvvmcross.droid.support.v7.recyclerview.LineDividedRecyclerView")]
+    public sealed class LineDividedRecyclerView : MvxRecyclerView
+    {
+        public LineDividedRecyclerView(Context context, IAttributeSet attrs) : this(context, attrs, 0, new MvxRecyclerAdapter())
+        {
+        }
+
+        public LineDividedRecyclerView(Context context, IAttributeSet attrs, int defStyle) : this(context, attrs, defStyle, new MvxRecyclerAdapter())
+        {
+        }
+
+        public LineDividedRecyclerView(Context context, IAttributeSet attrs, int defStyle, IMvxRecyclerAdapter adapter) : base(context, attrs, defStyle, adapter)
+        {
+            Setup(context);
+        }
+
+        private void SetDivider(Context context, Drawable drawable)
+        {
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+            this.SetLayoutManager(linearLayoutManager);
+            this.AddItemDecoration(new DividerItemDecoration(drawable, false, false));
+        }
+
+        private void Setup(Context context)
+        {
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+            this.SetLayoutManager(linearLayoutManager);
+
+            SetDivider(context, AppCompatExtensions.GetDrawable(Resource.Drawable.line_divider_shape).Mutate());
         }
     }
 }

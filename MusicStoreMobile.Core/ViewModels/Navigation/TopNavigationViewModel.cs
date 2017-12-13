@@ -18,6 +18,7 @@ namespace MusicStoreMobile.Core.ViewModels.Navigation
         {
             public string Title { get; set; }
 
+            public string SearchQuery { get; set; }
             public bool IsSearch { get; set; }
 
             public TopNavigationViewIconType HomeIconType { get; set; }
@@ -74,6 +75,9 @@ namespace MusicStoreMobile.Core.ViewModels.Navigation
 
         public readonly INC<string> Title = new NC<string>("");
         public readonly INC<bool> IsShowTitle = new NC<bool>(true);
+
+        //TODO: Bind to searchInput
+        public readonly INC<string> SearchQuery = new NC<string>("");
 
         public readonly INC<bool> IsSearch = new NC<bool>(false);
 
