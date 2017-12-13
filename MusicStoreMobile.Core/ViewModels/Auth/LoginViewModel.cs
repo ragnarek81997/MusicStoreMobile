@@ -74,7 +74,11 @@ namespace MusicStoreMobile.Core.ViewModels.Auth
                 Email.Value = parameter.Email;
                 Password.Value = parameter.Password;
 
-                LogInCommand?.Execute(null);
+                Task.Run(async () => 
+                {
+                    await Task.Delay(5000);
+                    LogInCommand?.Execute(null);
+                });
             }
         }
 
@@ -132,10 +136,10 @@ namespace MusicStoreMobile.Core.ViewModels.Auth
                 var serviceResult = await _authService.Login(Email.Value, Password.Value);
                 if (serviceResult.Success)
                 {
-                    await _bottomNavigationViewModelService.Show(new BottomNavigationViewModel.PrepareModel() { CheckedItem = Enums.BottomNavigationViewCheckedItemType.Home });
                     ClearStack.Execute(null);
                     await _navigationService.Navigate<HomeViewModel>();
-                   
+                    await _bottomNavigationViewModelService.Show(new BottomNavigationViewModel.PrepareModel() { CheckedItem = Enums.BottomNavigationViewCheckedItemType.Home });
+
                     _userDialogs.HideLoading();
                 }
                 else

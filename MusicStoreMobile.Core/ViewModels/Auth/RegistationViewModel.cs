@@ -159,10 +159,13 @@ namespace MusicStoreMobile.Core.ViewModels.Auth
                 _userDialogs.ShowLoading("Registration");
 
                 var user = new ApplicationUserModel() { Email = Email.Value, FirstName = FirstName.Value, LastName = LastName.Value, Password = Password.Value, BirthDate = BirthDate.Value };
+                
                 var serviceResult = await _authService.Register(user);
+
                 if (serviceResult.Success)
                 {
                     await _navigationService.Navigate<LoginViewModel, ApplicationUserModel>(new ApplicationUserModel() { Email = Email.Value, Password = Password.Value });
+
                     _userDialogs.HideLoading();
                 }
                 else

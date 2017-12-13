@@ -139,6 +139,12 @@ namespace MusicStoreMobile.Core.ViewModels.Preferences
                 {
                     await _navigationService.Close(this);
                     _userDialogs.HideLoading();
+                    await _userDialogs.AlertAsync(new AlertConfig
+                    {
+                        Title = "Success!",
+                        Message = serviceResult.Error.Description,
+                        OkText = "OK"
+                    });
                 }
                 else
                 {

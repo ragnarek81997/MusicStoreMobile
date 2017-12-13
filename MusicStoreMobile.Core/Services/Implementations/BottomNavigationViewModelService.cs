@@ -63,18 +63,17 @@ namespace MusicStoreMobile.Core.Services.Implementations
 
         public async Task<ServiceResult> CheckItem(BottomNavigationViewCheckedItemType checkedItem)
         {
-            var serviceResult = new ServiceResult();
+            var serviceResult = new ServiceResult() { Success = true };
 
             var viewModelResult = await Get();
-            if(viewModelResult.Success)
+            if (viewModelResult.Success)
             {
                 var viewModel = viewModelResult.Result;
                 viewModel.CheckedItem.Value = checkedItem;
-                serviceResult.Success = true;
             }
             else
             {
-                serviceResult.Success = false;
+                await this.Show(new BottomNavigationViewModel.PrepareModel() { CheckedItem = checkedItem });
             }
             return serviceResult;
         }
